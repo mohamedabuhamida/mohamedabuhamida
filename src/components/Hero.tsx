@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -50,13 +52,15 @@ export default function Hero({ data }: HeroProps) {
             <Reveal delay={0.3}>
               <div className="flex  gap-3 sm:gap-4 pt-3 md:pt-4">
                 <Link
-                  href="/resume"
+                  href="/api/cv"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-accent text-bg font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-accent/90 transition-all duration-300 hover:scale-105 active:scale-95 text-center text-sm sm:text-base"
                 >
                   View Resume
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/#contact"
                   className="border border-text text-text font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95 text-center text-sm sm:text-base"
                 >
                   Let's Work Together
