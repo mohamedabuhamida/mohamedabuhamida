@@ -1,65 +1,142 @@
-import Image from "next/image";
+"use client";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+import Hero from "@/components/Hero";
+import About from "@/components/(about)/About";
+import { useState, useEffect } from "react";
+import LoadingWrapper from "@/components/LoadingWrapper";
+import ProjectsSection from "@/components/ProjectsSection";
+import ContactSection from "@/components/ContactSection";
+import {
+  HeroProps,
+  SkillProps,
+  EducationProps,
+  ExperienceProps,
+  AchievementProps,
+  CertificateProps,
+  ProjectProps,
+} from "@/types";
 
 export default function Home() {
+  const [heroData, setHeroData] = useState<HeroProps["data"] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [skills, setSkills] = useState<SkillProps[]>([]);
+  const [education, setEducation] = useState<EducationProps[]>([]);
+  const [experience, setExperience] = useState<ExperienceProps[]>([]);
+  const [achievements, setAchievements] = useState<AchievementProps[]>([]);
+  const [certificates, setCertificates] = useState<CertificateProps[]>([]);
+  const [projects, setProjects] = useState<ProjectProps[]>([]);
+
+  const fetchHero = async () => {
+    try {
+      const res = await fetch("/api/hero");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setHeroData(data);
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to fetch hero data");
+    }
+  };
+
+  const fetchSkills = async () => {
+    try {
+      const res = await fetch("/api/skills");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setSkills(data);
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to fetch skills");
+    }
+  };
+
+  const fetchEducation = async () => {
+    try {
+      const res = await fetch("/api/education");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setEducation(data);
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to fetch education");
+    }
+  };
+
+  const fetchExperience = async () => {
+    try {
+      const res = await fetch("/api/experience");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setExperience(data);
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to fetch experience");
+    }
+  };
+
+  const fetchAchievements = async () => {
+    try {
+      const res = await fetch("/api/achievements");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setAchievements(data);
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to fetch achievements");
+    }
+  };
+
+  const fetchCertificates = async () => {
+    try {
+      const res = await fetch("/api/certificates");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setCertificates(data);
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to fetch certificates");
+    }
+  };
+  const fetchProjects = async () => {
+    try {
+      const res = await fetch("/api/projects");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+      setProjects(data);
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to fetch Projects");
+    }
+  };
+
+  useEffect(() => {
+    fetchHero();
+    fetchSkills();
+    fetchEducation();
+    fetchExperience();
+    fetchAchievements();
+    fetchCertificates();
+    fetchProjects();
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <LoadingWrapper isLoading={!heroData}>
+      <Header />
+
+      <Hero data={heroData!} />
+      <About
+        skills={skills}
+        education={education}
+        experience={experience}
+        achievements={achievements}
+        certificates={certificates}
+      />
+      <ProjectsSection projects={projects} />
+      <ContactSection />
+      <Footer />
+    </LoadingWrapper>
   );
 }
