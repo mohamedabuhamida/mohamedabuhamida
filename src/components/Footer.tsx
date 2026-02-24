@@ -44,17 +44,17 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="#about" className="hover:text-accent transition">
+                  <Link href="/#about" className="hover:text-accent transition">
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link href="#work" className="hover:text-accent transition">
+                  <Link href="/#projects" className="hover:text-accent transition">
                     Work
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="hover:text-accent transition">
+                  <Link href="/#contact" className="hover:text-accent transition">
                     Contact
                   </Link>
                 </li>
@@ -68,7 +68,8 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/contact"
+                    href="mailto:mohamedabuhamida3@gmail.com"
+                    target="_blank"
                     className="hover:text-accent transition"
                   >
                     Email
