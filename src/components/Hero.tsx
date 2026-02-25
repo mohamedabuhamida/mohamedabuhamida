@@ -10,7 +10,7 @@ import { HeroProps } from "@/types";
 
 export default function Hero({ data }: HeroProps) {
   return (
-    <section className="font-sans min-h-screen flex items-center justify-center bg-linear-to-tr from-bg to-primary overflow-hidden">
+    <section id="home" className="font-sans min-h-screen flex items-center justify-center bg-linear-to-tr from-bg to-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-16 md:py-24 lg:py-28 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Left column: Text content */}

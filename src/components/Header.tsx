@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaLinkedinIn } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa6";
+import { Github, Linkedin } from "lucide-react";
 import { FaUpwork } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   // Sticky header
   useEffect(() => {
@@ -38,8 +39,34 @@ export default function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Active section observer
+  useEffect(() => {
+    const sections = ["home", "about", "projects", "contact"];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: 0,
+      },
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const navigationItems = [
-      { label: "Home", href: "/" },
+    { label: "Home", href: "/#home" },
     { label: "About", href: "/#about" },
     { label: "Projects", href: "/#projects" },
     { label: "Contact", href: "/#contact" },
@@ -49,7 +76,11 @@ export default function Header() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300
-        ${isSticky ? "backdrop-blur-md bg-primary/10 shadow-lg max-w-7xl mx-auto rounded-full top-4" : "bg-transparent"}`}
+        ${
+          isSticky
+            ? "backdrop-blur-md bg-primary/10 shadow-lg max-w-7xl mx-auto rounded-full top-4"
+            : "bg-transparent"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-24">
           <div
@@ -69,29 +100,56 @@ export default function Header() {
               />
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="font-medium text-text hover:text-accent transition"
-                >
-                  {item.label}
-                </Link>
-              ))}
+            {/* Desktop Nav (NOT Floating anymore) */}
+            <nav className="hidden md:flex items-center gap-2 relative">
+              {navigationItems.map((item) => {
+                const sectionId =
+                  item.href === "/"
+                    ? "home"
+                    : item.href.replace("/#", "").replace("/", "");
+
+                const isActive = activeSection === sectionId;
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className="relative px-5 py-2 text-sm font-medium"
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-indicator"
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 30,
+                          mass: 0.6,
+                        }}
+                        className="absolute inset-0 rounded-full bg-accent/20"
+                      />
+                    )}
+
+                    <span
+                      className={`relative z-10 transition-colors duration-300 ${
+                        isActive ? "text-accent" : "text-text"
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Actions */}
             <div className="flex items-center gap-4">
-              {/* LinkedIn Desktop */}
               <Link
                 href="https://linkedin.com/in/mohamedabuhamida"
                 target="_blank"
                 className="hidden md:block text-text hover:text-accent transition"
                 aria-label="LinkedIn"
               >
-                <FaLinkedinIn className="text-xl" />
+                <Linkedin className="text-xl" />
               </Link>
               <Link
                 href="https://github.com/mohamedabuhamida"
@@ -99,7 +157,7 @@ export default function Header() {
                 className="hidden md:block text-text hover:text-accent transition"
                 aria-label="GitHub"
               >
-                <FaGithub className="text-xl" />
+                <Github className="text-xl" />
               </Link>
               <Link
                 href="https://www.upwork.com/freelancers/~0191d02b8deff4294c"
@@ -135,18 +193,16 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — unchanged */}
       <div
         className={`fixed inset-0 z-50 md:hidden transition-all duration-300
         ${isMobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"}`}
       >
-        {/* Backdrop */}
         <div
           className="absolute inset-0 bg-black/60"
           onClick={() => setIsMobileMenuOpen(false)}
         />
 
-        {/* Drawer */}
         <div
           className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-linear-to-br from-primary to-bg
           transition-transform duration-300
@@ -172,27 +228,9 @@ export default function Header() {
             ))}
 
             <div className="pt-6 border-t border-white/10 flex gap-4">
-              <Link
-                href="https://linkedin.com/in/mohamedabuhamida"
-                target="_blank"
-                className="hover:text-accent transition"
-              >
-                <FaLinkedinIn />
-              </Link>
-              <Link
-                href="https://github.com/mohamedabuhamida"
-                target="_blank"
-                className="hover:text-accent transition"
-              >
-                <FaGithub />
-              </Link>
-              <Link
-                href="https://www.upwork.com/freelancers/~0191d02b8deff4294c"
-                target="_blank"
-                className="hover:text-accent transition"
-              >
-                <FaUpwork />
-              </Link>
+              <Linkedin />
+              <Github />
+              <FaUpwork />
             </div>
           </div>
         </div>
