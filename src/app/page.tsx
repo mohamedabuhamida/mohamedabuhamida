@@ -7,8 +7,8 @@ import Hero from "@/components/Hero";
 import About from "@/components/(about)/About";
 import { useState, useEffect } from "react";
 import LoadingWrapper from "@/components/LoadingWrapper";
-import ProjectsSection from "@/components/ProjectsSection";
-import ContactSection from "@/components/ContactSection";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
 import {
   HeroProps,
   SkillProps,
@@ -134,8 +134,8 @@ export default function Home() {
         achievements={achievements}
         certificates={certificates}
       />
-      <ProjectsSection projects={projects} />
-      <ContactSection />
+      <Projects projects={projects} />
+      <Contact />
       <Footer />
     </LoadingWrapper>
   );

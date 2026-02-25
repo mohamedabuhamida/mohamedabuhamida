@@ -10,7 +10,7 @@ import { HeroProps } from "@/types";
 
 export default function Hero({ data }: HeroProps) {
   return (
-    <section className="font-sans min-h-screen flex items-center justify-center bg-gradient-to-tr from-bg to-primary overflow-hidden">
+    <section className="font-sans min-h-screen flex items-center justify-center bg-linear-to-tr from-bg to-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-16 md:py-24 lg:py-28 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Left column: Text content */}
@@ -27,7 +27,7 @@ export default function Hero({ data }: HeroProps) {
             <Reveal delay={0.1}>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold leading-tight">
                 {data.title}{" "}
-                <span className="text-accent bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">
+                <span className=" bg-linear-to-r from-accent to-accent/80 bg-clip-text text-transparent">
                   {data.name}
                 </span>
               </h1>
@@ -50,20 +50,41 @@ export default function Hero({ data }: HeroProps) {
 
             {/* CTA Buttons - Stack on mobile */}
             <Reveal delay={0.3}>
-              <div className="flex  gap-3 sm:gap-4 pt-3 md:pt-4">
+              <div className="flex gap-5 pt-4">
+                {/* Resume Button */}
                 <Link
                   href="/api/cv"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-accent text-bg font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-accent/90 transition-all duration-300 hover:scale-105 active:scale-95 text-center text-sm sm:text-base"
+                  className="group relative inline-flex items-center justify-center px-9 py-3 rounded-full text-sm sm:text-base font-semibold text-white overflow-hidden bg-linear-to-b from-primary transition-all duration-300 hover:-translate-y-1 active:translate-y-1 "
                 >
-                  View Resume
+                  {/* Animated Border */}
+                  {/* <span className="absolute inset-0 rounded-full p-[1px] bg-linear-to-r from-accent via-white/40 to-accent animate-[spin_6s_linear_infinite] [mask-composite:exclude]"></span> */}
+
+                  {/* Inner Highlight */}
+                  <span className="absolute inset-0.5 rounded-full bg-linear-to-b from-white/20 to-transparent opacity-60 pointer-events-none"></span>
+
+                  {/* Shine Effect */}
+                  <span className="absolute -left-full top-0 h-full w-[60%] bg-linear-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] animate-[shine_6s_ease-in-out_infinite]"></span>
+
+                  <span className="relative z-10">View Resume</span>
                 </Link>
+
+                {/* Contact Button */}
                 <Link
                   href="/#contact"
-                  className="border border-text text-text font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95 text-center text-sm sm:text-base"
+                  className="group relative inline-flex items-center justify-center px-9 py-3 rounded-full text-sm sm:text-base font-semibold text-white overflow-hidden backdrop-blur-md bg-primary/10  border border-white/10 transition-all duration-300 hover:-translate-y-1 active:translate-y-1 shadow-[0_10px_25px_rgba(0,0,0,0.4)]"
                 >
-                  Let's Work Together
+                  {/* Subtle Animated Border */}
+                  {/* <span className="absolute inset-0 rounded-full border border-white/20 group-hover:border-accent transition-all duration-500"></span> */}
+
+                  {/* Inner Light */}
+                  <span className="absolute inset-px rounded-full bg-linear-to-b from-white/15 to-transparent opacity-50 pointer-events-none"></span>
+
+                  {/* Shine */}
+                  <span className="absolute -left-full top-0 h-full w-[60%] bg-linear-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg] animate-[shine_6s_ease-in-out_infinite]"></span>
+
+                  <span className="relative z-10">Let’s Work Together</span>
                 </Link>
               </div>
             </Reveal>

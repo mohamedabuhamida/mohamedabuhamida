@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin } from "lucide-react";
 
-export default function ContactSection() {
+export default function Contact() {
   return (
     <section id="contact" className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden">
 
@@ -18,7 +18,7 @@ export default function ContactSection() {
         className="relative z-10 text-center px-6 max-w-3xl"
       >
         {/* Headline */}
-        <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+        <h2 className="text-4xl md:text-5xl font-semibold mb-6">
           Let’s Build Something Intelligent.
         </h2>
 

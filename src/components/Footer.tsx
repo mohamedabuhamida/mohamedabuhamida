@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="font-sans bg-gradient-to-br from-bg to-primary text-text py-14 px-6 md:px-12 lg:px-24">
+    <footer className="font-sans bg-linear-to-br from-bg to-primary text-text py-14 px-6 md:px-12 lg:px-24 rounded-t-[60px]">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section */}
