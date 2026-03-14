@@ -1,58 +1,117 @@
-# Hi 👋 I'm Mohamed AbuHamida
+<!-- Animated Header -->
+<h1 align="center">Hi , I'm Mohamed AbuHamida</h1>
+<h3 align="center">AI Engineer | LLM Systems | RAG Architectures | Computer Vision</h3>
 
-AI Engineer specializing in **LLM-powered systems, RAG pipelines, and Computer Vision**.
-
-🚀 I build production-ready AI systems using modern machine learning and LLM frameworks.
-
----
-
-## 🌐 Portfolio
-https://mohamedabuhamida.vercel.app
+<p align="center">
+<img src="https://readme-typing-svg.herokuapp.com/?lines=AI+Engineer;LLM+Systems+Developer;RAG+Architecture+Builder;Computer+Vision+Engineer&center=true&width=500&height=50">
+</p>
 
 ---
 
-## 💻 Tech Stack
+#  About Me
 
-**AI & Machine Learning**
-- Python
-- TensorFlow / PyTorch
-- Scikit-learn
-- OpenCV
+ AI Engineer passionate about building **production-ready AI systems**
 
-**LLM & AI Systems**
-- LangChain
-- RAG Architectures
-- Prompt Engineering
-- Vector Databases
+ Specialized in:
 
-**Backend & Tools**
-- FastAPI
-- Docker
-- Git / GitHub
-- Linux
+- Large Language Models (LLMs)
+- Retrieval-Augmented Generation (RAG)
+- AI Agents & LangChain systems
+- Computer Vision applications
+- End-to-end AI deployment
+
+ I enjoy transforming **research ideas into real-world AI products**
 
 ---
 
-## 🚀 Featured Projects
+#  Portfolio
 
-### 🧠 AI Career Automation System
-LLM-powered system that analyzes CVs, matches jobs using RAG pipelines, and generates tailored applications.
+<p align="center">
 
-### 🛒 Smart Shopping Cart
-Computer vision retail system using YOLO for product detection and automated shopping assistance.
+<a href="https://mohamedabuhamida.vercel.app">
+<img src="https://img.shields.io/badge/Portfolio-Visit%20Website-blue?style=for-the-badge">
+</a>
 
-### 🚗 Egyptian Car Plate Recognition
-Deep learning pipeline for Arabic license plate detection and OCR recognition.
+<a href="https://linkedin.com/in/mohamedabuhamida">
+<img src="https://img.shields.io/badge/LinkedIn-Mohamed%20AbuHamida-blue?style=for-the-badge&logo=linkedin">
+</a>
+
+<a href="mailto:mohamedabuhamida3@gmail.com">
+<img src="https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail">
+</a>
+
+</p>
 
 ---
 
-## 📫 Connect with me
+#  Featured AI Projects
 
-LinkedIn  
-https://www.linkedin.com/in/mohammed-abuhamida
+###  AI Career Automation System
+LLM-powered AI agent that analyzes CVs, performs job matching using **RAG pipelines**, and generates tailored job applications.
 
-GitHub  
-https://github.com/mohamedabuhamida
+**Tech:** LangChain • FastAPI • Next.js • Gemini/OpenAI APIs • Docker
 
-Email  
-mohamedabuhamida3@gmail.com
+---
+
+###  Smart Shopping Cart
+Computer vision system using **YOLO** for real-time product recognition and automated retail experience.
+
+**Tech:** YOLO • OpenCV • Python
+
+---
+
+###  Egyptian Car Plate Recognition
+Deep learning pipeline for **Arabic license plate detection and OCR recognition**.
+
+**Tech:** YOLOv8 • EasyOCR • CNN
+
+---
+
+#  Tech Stack
+
+### AI / Machine Learning
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
+
+### LLM & AI Systems
+
+LangChain • RAG • Prompt Engineering • Vector Databases • AI Agents
+
+### Backend
+
+FastAPI • Flask • REST APIs • Docker • Linux
+
+### Frontend
+
+Next.js • React • TypeScript
+
+---
+
+#  GitHub Stats
+
+<p align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=mohamedabuhamida&show_icons=true&theme=tokyonight&hide_border=true"/>
+
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=mohamedabuhamida&theme=tokyonight&hide_border=true"/>
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mohamedabuhamida&layout=compact&theme=tokyonight&hide_border=true"/>
+
+</p>
+
+---
+
+#  Profile Visitors
+
+<p align="center">
+
+<img src="https://komarev.com/ghpvc/?username=mohamedabuhamida&label=Profile%20views&color=0e75b6&style=flat"/>
+
+</p>
+
+---
+
+ If you like my work, feel free to **star the repositories**
