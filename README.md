@@ -107,8 +107,8 @@ Next.js • React • TypeScript
 
 * 📧 Email: [mohamedabuhamida3@gmail.com](mailto:mohamedabuhamida3@gmail.com)
 * 💼 LinkedIn: [Mohammed AbuHamida](https://www.linkedin.com/in/mohamedabuhamida)
-* 🌐 Portfolio: [mohamed-abuhamida.vercel.app](https://mohamedabuhamida.vercel.app/)
-* 👨‍💻 GitHub: [github.com/Abuhamida](https://github.com/mohamedabuhamida)
+* 🌐 Portfolio: [mohamedabuhamida.vercel.app](https://mohamedabuhamida.vercel.app/)
+* 👨‍💻 GitHub: [github.com/mohamedabuhamida](https://github.com/mohamedabuhamida)
 * 🧰 Freelance Profiles:
   [Upwork](https://www.upwork.com/freelancers/~0191d02b8deff4294c) |
   [Mostaql](https://mostaql.com/u/Mohammed_145) |
