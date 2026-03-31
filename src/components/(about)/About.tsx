@@ -110,7 +110,7 @@ export default function About({
 
 
       </StickySection>
-      <StickySection className="bg-[#0a0a0a] ">
+      <StickySection className="bg-linear-to-tr from-bg to-primary ">
         <SectionHeader title="Achievements" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Achievements achievements={achievements} />{" "}
