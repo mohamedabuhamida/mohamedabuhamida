@@ -14,7 +14,7 @@ export default function Achievements({
 
   return (
     // Grid container must NOT have overflow-hidden
-    <div className="grid grid-cols-1 md:grid-cols-2 w-full relative">
+    <div className="grid grid-cols-1 md:grid-cols-2 w-full relative max-w-5xl ">
       
       {/* LEFT COLUMN: The Cards */}
       {/* This column will be very tall (e.g., 4 cards = 400vh) */}
