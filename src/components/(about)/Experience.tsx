@@ -82,7 +82,7 @@ function ExperienceItem({ item, isLeft, isCurrent }: { item: any, isLeft: boolea
 
       <div className="absolute left-0 md:static md:col-start-2 flex justify-center">
         <div className={`z-10 flex h-10 w-10 items-center justify-center rounded-full border-4 border-bg shadow-xl ${
-          isCurrent ? "bg-accent text-bg" : "bg--800 text-white"
+          isCurrent ? "bg-accent text-bg" : "bg-primary/80 text-white"
         }`}>
           <HiCheck size={20} />
         </div>
