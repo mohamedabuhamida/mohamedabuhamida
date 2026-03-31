@@ -32,7 +32,7 @@ export default function Achievements({
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               // z-index ensures newer cards appear on top of older ones
               style={{ zIndex: index + 1 }}
-              className="w-full max-w-sm p-8 rounded-3xl border border-white/10 bg-[#0a0a0a] shadow-[0_-20px_50px_rgba(0,0,0,0.5)]"
+              className="w-full max-w-sm p-8 rounded-3xl border border-white/10 bg-bg shadow-[0_-20px_50px_rgba(0,0,0,0.5)]"
             >
               <div className="space-y-4">
                 <div className="text-4xl">🏆</div>
