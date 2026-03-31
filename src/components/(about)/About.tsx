@@ -97,10 +97,10 @@ export default function About({
       </StickySection>
 
       {/* 3. EXPERIENCE SECTION (Sticky Scroll Container) */}
-      <div ref={expRef} className="relative lg:h-[250vh]">
-        <div className="w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-visible px-4 py-16 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:px-0 lg:py-0">
+      <div ref={expRef} className="relative md:h-[250vh]">
+        <div className="w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-visible px-4 py-16 md:sticky md:top-0 md:h-screen md:overflow-hidden md:px-0 md:py-0">
           <SectionHeader title="Professional" accent="Experience" />
-          <div className="w-full max-w-5xl lg:h-full">
+          <div className="w-full max-w-5xl md:h-full">
             <Experience experience={experience} scrollYProgress={expScroll} />
           </div>
         </div>
