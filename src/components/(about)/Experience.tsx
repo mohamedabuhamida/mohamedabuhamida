@@ -69,7 +69,7 @@ function ExperienceItem({ item, isLeft, isCurrent }: { item: any, isLeft: boolea
     >
       <div className={`${isLeft ? "md:col-start-1 md:text-right md:pr-8" : "md:col-start-3 md:pl-8"}`}>
         <div className={`inline-block p-5 rounded-2xl border transition-all duration-500 ${
-          isCurrent ? "border-accent bg-accent/5 shadow-[0_0_20px_rgba(var(--accent-rgb),0.1)]" : "border-white/10 bg-white/5"
+          isCurrent ? "border-accent bg-accent/5 shadow-[0_0_20px_rgba(var(--accent-rgb),0.1)]" : "border-white/10 "
         }`}>
           <span className="text-xs font-bold text-accent uppercase tracking-widest">
             {formatDateRange(item.start_date, item.end_date, item.is_current)}
