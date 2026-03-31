@@ -56,16 +56,16 @@ export default function About({
           <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
             <p>
               I&apos;m an{" "}
-              <span className="font-semibold text-text">AI Engineer</span> focused
-              on building intelligent systems powered by
-              <span className="text-accent"> Large Language Models (LLMs)</span>,
-              Retrieval-Augmented Generation (RAG), and modern AI pipelines.
+              <span className="font-semibold text-text">AI Engineer</span>{" "}
+              focused on building intelligent systems powered by
+              <span className="text-accent"> Large Language Models (LLMs)</span>
+              , Retrieval-Augmented Generation (RAG), and modern AI pipelines.
             </p>
 
             <p>
               My work revolves around designing scalable AI architectures,
-              integrating vector databases, and deploying real-world applications
-              that transform data into actionable intelligence.
+              integrating vector databases, and deploying real-world
+              applications that transform data into actionable intelligence.
             </p>
 
             <p>
@@ -93,9 +93,9 @@ export default function About({
           <SectionHeader title="Professional" accent="Experience" />
           <div className="w-full h-full max-w-5xl">
             {/* Pass the scroll progress to the Experience component */}
-            <Experience 
-              experience={experience} 
-              scrollYProgress={experienceScrollProgress} 
+            <Experience
+              experience={experience}
+              scrollYProgress={experienceScrollProgress}
             />
           </div>
         </section>
@@ -108,12 +108,17 @@ export default function About({
           <Education education={education} />
         </div>
       </StickySection>
+      <StickySection className="bg-[#0a0a0a] shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+        <SectionHeader title="Academic" accent="Background" />
+        <div className="w-full max-w-5xl px-4">
+          <Achievements achievements={achievements} />{" "}
+        </div>
+      </StickySection>
 
       {/* 5. ACHIEVEMENTS & CERTIFICATES */}
-      <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
-        <SectionHeader title="Awards &" accent="Certifications" />
-        <div className="w-full max-w-6xl px-4 grid md:grid-cols-2 gap-12">
-          <Achievements achievements={achievements} />
+      <StickySection className="bg-[#0a0a0a] shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+        <SectionHeader title="Academic" accent="Background" />
+        <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
         </div>
       </StickySection>
