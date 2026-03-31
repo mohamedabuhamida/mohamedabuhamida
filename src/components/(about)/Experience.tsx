@@ -15,7 +15,7 @@ export default function Experience({
 
   return (
     <div className="w-full">
-      <div className="mx-auto max-w-5xl rounded-[28px] border border-border bg-primary/5 p-6 md:p-10">
+      <div className="mx-auto max-w-5xl  p-6 md:p-10">
         <div className="mb-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent/80">
             Career Path
