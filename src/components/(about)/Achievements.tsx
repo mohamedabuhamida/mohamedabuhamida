@@ -29,7 +29,7 @@ export default function Achievements({
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               style={{ zIndex: index + 1 }}
               // Added h-[480px] for fixed height and flex flex-col
-              className="w-full max-w-sm h-120 p-8 rounded-3xl border border-white/10 bg-bg shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col justify-between"
+              className="w-full max-w-sm h-120 p-8 rounded-3xl border border-white/10 bg-bg  flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div className="text-4xl">🏆</div>
