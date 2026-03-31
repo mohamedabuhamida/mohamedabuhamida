@@ -108,7 +108,7 @@ export default function About({
       </StickySection>
       
       {/* 5. CERTIFICATIONS SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
@@ -116,7 +116,7 @@ export default function About({
       </StickySection>
 
       {/* 6. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
-      <section id="achievements" className="relative bg-black">
+      <section id="achievements" className="relative bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <Achievements achievements={achievements} />
       </section>
 
