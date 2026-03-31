@@ -93,9 +93,6 @@ export default function About({
 
       {/* 5. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
       <section id="achievements" className="relative bg-black">
-        {/* Add a shadow here to transition from the previous section */}
-        <div className="absolute top-0 w-full h-24 bg-linear-to-b from-black/50 to-transparent z-20 pointer-events-none" />
-
         <Achievements achievements={achievements} />
       </section>
 
