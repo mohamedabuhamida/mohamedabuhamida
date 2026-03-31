@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef  } from "react";
 import Reveal from "@/components/animation/Reveal";
 import { motion } from "framer-motion";
 
@@ -31,6 +31,16 @@ export default function About({
   achievements: AchievementProps[];
   certificates: CertificateProps[];
 }) {
+
+  const experienceSectionRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll for just the Experience part
+  const { scrollYProgress: expScroll } = useScroll({
+    target: experienceSectionRef,
+    offset: ["start start", "end end"] // Active while the section is pinned
+  });
+
+
   return (
     // The outer container handles the ID for the Header observer
     <div id="about" className="relative">
