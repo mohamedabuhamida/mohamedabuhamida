@@ -88,7 +88,7 @@ export default function About({
       </StickySection>
 
       {/* 3. EXPERIENCE SECTION (Special Sticky Scroll) */}
-      <div ref={experienceContainerRef} className="h-[250vh] relative">
+      <div ref={experienceContainerRef} className="h-[300vh] relative">
         <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
           <SectionHeader title="Professional" accent="Experience" />
           <div className="w-full h-full max-w-5xl">
