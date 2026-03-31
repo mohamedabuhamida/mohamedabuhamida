@@ -1,11 +1,8 @@
-import React from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/animation/Reveal";
-import { FaGraduationCap } from "react-icons/fa";
-import { FaTrophy } from "react-icons/fa";
-import { MdWorkHistory } from "react-icons/md";
-import { TbTopologyStar3 } from "react-icons/tb";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 import Tabs from "./Tabs";
 
@@ -37,29 +34,39 @@ export default function About({
   certificates: CertificateProps[];
 }) {
   const [visable, setVisable] = useState("skills");
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "start start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.82, 1]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [120, 0]);
+
   return (
-    <section
+    <motion.section
+      ref={sectionRef}
+      style={{ scale, rotate, y }}
       id="about"
-      className="font-sans bg-bg text-text py-20 px-6 md:px-12 lg:px-24  overflow-hidden "
+      className="font-sans bg-bg px-6 py-20 text-text md:px-12 lg:px-24 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Section Title */}
         <Reveal>
           <div className="mb-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               About <span className="text-accent">Me</span>
             </h2>
-            <div className="w-20 h-1 bg-accent mx-auto rounded-full"></div>
+            <div className="mx-auto h-1 w-20 rounded-full bg-accent"></div>
           </div>
         </Reveal>
 
-        <div className="flex flex-col justify-center items-center space-y-12">
-          {/* Left: Text */}
+        <div className="flex flex-col items-center justify-center space-y-12">
           <Reveal delay={0.2}>
-            <div className="space-y-6 text-text-muted leading-relaxed max-w-4xl text-center ">
+            <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted">
               <p>
-                I'm an{" "}
-                <span className="text-text font-semibold">AI Engineer</span>{" "}
+                I&apos;m an{" "}
+                <span className="font-semibold text-text">AI Engineer</span>{" "}
                 focused on building intelligent systems powered by
                 <span className="text-accent">
                   {" "}
@@ -85,17 +92,16 @@ export default function About({
               </p>
 
               <p>
-                I believe in bridging the gap between research and production —
+                I believe in bridging the gap between research and production -
                 turning complex AI concepts into reliable, scalable solutions.
               </p>
             </div>
           </Reveal>
 
-          {/* Right: Skills Grid */}
           <Reveal delay={0.3}>
-            <div className=" flex flex-col space-y-12 justify-between items-center lg:justify-start  max-w-screen">
+            <div className="flex max-w-screen flex-col items-center justify-between space-y-12 lg:justify-start">
               <Tabs visable={visable} setVisable={setVisable} />
-              <div className="w-full px-4 md:px-28 ">
+              <div className="w-full px-4 md:px-28">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={visable}
@@ -124,6 +130,6 @@ export default function About({
           </Reveal>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
