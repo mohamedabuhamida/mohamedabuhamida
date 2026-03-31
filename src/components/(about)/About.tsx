@@ -35,11 +35,17 @@ export default function About({
   // We track the scroll specifically for the Experience container
   // 1. Ref for Experience (existing)
   const expRef = useRef(null);
-  const { scrollYProgress: expScroll } = useScroll({ target: expRef, offset: ["start start", "end end"] });
+  const { scrollYProgress: expScroll } = useScroll({
+    target: expRef,
+    offset: ["start start", "end end"],
+  });
 
   // 2. Ref for Achievements (NEW)
   const achieveRef = useRef(null);
-  const { scrollYProgress: achieveScroll } = useScroll({ target: achieveRef, offset: ["start start", "end end"] });
+  const { scrollYProgress: achieveScroll } = useScroll({
+    target: achieveRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
     <div id="about" className="relative bg-black">
@@ -95,10 +101,7 @@ export default function About({
           <SectionHeader title="Professional" accent="Experience" />
           <div className="w-full h-full max-w-5xl">
             {/* Pass the scroll progress to the Experience component */}
-            <Experience
-              experience={experience}
-              scrollYProgress={expScroll}
-            />
+            <Experience experience={experience} scrollYProgress={expScroll} />
           </div>
         </section>
       </div>
@@ -112,15 +115,19 @@ export default function About({
       </StickySection>
 
       <div ref={expRef} className="h-[250vh] relative">
-      <StickySection className="bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] ">
-        <SectionHeader title="Achievements" accent="" />
-        <div className="w-full max-w-5xl px-4">
-          <Achievements achievements={achievements} scrollYProgress={achieveScroll}  />
-        </div>
-      </StickySection></div>
+        <StickySection className="bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] ">
+          <SectionHeader title="Achievements" accent="" />
+          <div className="w-full max-w-5xl px-4">
+            <Achievements
+              achievements={achievements}
+              scrollYProgress={achieveScroll}
+            />
+          </div>
+        </StickySection>
+      </div>
 
       {/* 5. ACHIEVEMENTS & CERTIFICATES */}
-      <StickySection  className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
