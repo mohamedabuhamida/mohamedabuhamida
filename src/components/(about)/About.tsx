@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Reveal from "@/components/animation/Reveal";
-import { useScroll, useTransform } from "framer-motion";
+import { useScroll } from "framer-motion";
 
 import Skills from "./Skills";
 import Experience from "./Experience";
@@ -31,17 +31,15 @@ export default function About({
   achievements: AchievementProps[];
   certificates: CertificateProps[];
 }) {
-  // --- EXPERIENCE SCROLL LOGIC ---
-  // We track the scroll specifically for the Experience container
-  // 1. Ref for Experience (existing)
-  const expRef = useRef(null);
+  // 1. UNIQUE REF for Experience
+  const expRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: expScroll } = useScroll({
     target: expRef,
     offset: ["start start", "end end"],
   });
 
-  // 2. Ref for Achievements (NEW)
-  const achieveRef = useRef(null);
+  // 2. UNIQUE REF for Achievements
+  const achieveRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: achieveScroll } = useScroll({
     target: achieveRef,
     offset: ["start start", "end end"],
@@ -49,6 +47,7 @@ export default function About({
 
   return (
     <div id="about" className="relative bg-black">
+      
       {/* 1. INTRO SECTION */}
       <StickySection className="bg-bg border-t border-white/5">
         <Reveal>
@@ -59,26 +58,11 @@ export default function About({
             <div className="mx-auto h-1.5 w-20 rounded-full bg-accent"></div>
           </div>
         </Reveal>
-
         <Reveal delay={0.2}>
           <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
             <p>
-              I&apos;m an{" "}
-              <span className="font-semibold text-text">AI Engineer</span>{" "}
-              focused on building intelligent systems powered by
-              <span className="text-accent"> Large Language Models (LLMs)</span>
-              , Retrieval-Augmented Generation (RAG), and modern AI pipelines.
-            </p>
-
-            <p>
-              My work revolves around designing scalable AI architectures,
-              integrating vector databases, and deploying real-world
-              applications that transform data into actionable intelligence.
-            </p>
-
-            <p>
-              I believe in bridging the gap between research and production -
-              turning complex AI concepts into reliable, scalable solutions.
+              I&apos;m an <span className="font-semibold text-text">AI Engineer</span> focused on building intelligent systems powered by
+              <span className="text-accent"> LLMs</span>, RAG, and AI pipelines.
             </p>
             <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
               Scroll to explore my journey ↓
@@ -88,46 +72,45 @@ export default function About({
       </StickySection>
 
       {/* 2. SKILLS SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Technical" accent="Skills" />
         <div className="w-full max-w-5xl px-4">
           <Skills skills={skills} />
         </div>
       </StickySection>
 
-      {/* 3. EXPERIENCE SECTION (Special Sticky Scroll) */}
+      {/* 3. EXPERIENCE SECTION (Sticky Scroll Container) */}
       <div ref={expRef} className="h-[250vh] relative">
-        <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
           <SectionHeader title="Professional" accent="Experience" />
           <div className="w-full h-full max-w-5xl">
-            {/* Pass the scroll progress to the Experience component */}
             <Experience experience={experience} scrollYProgress={expScroll} />
           </div>
-        </section>
+        </div>
       </div>
 
       {/* 4. EDUCATION SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Academic" accent="Background" />
         <div className="w-full max-w-5xl px-4">
           <Education education={education} />
         </div>
       </StickySection>
 
+      {/* 5. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
       <div ref={achieveRef} className="h-[250vh] relative">
-        <StickySection className="bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] ">
-          <SectionHeader title="Achievements" accent="" />
-          <div className="w-full max-w-5xl px-4">
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
+          <div className="w-full h-full max-w-6xl px-4 flex items-center justify-center">
             <Achievements
               achievements={achievements}
               scrollYProgress={achieveScroll}
             />
           </div>
-        </StickySection>
+        </div>
       </div>
 
-      {/* 5. ACHIEVEMENTS & CERTIFICATES */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      {/* 6. CERTIFICATIONS SECTION */}
+      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
