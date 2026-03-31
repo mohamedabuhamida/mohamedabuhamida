@@ -13,16 +13,13 @@ export default function Achievements({
   );
 
   return (
-    // Grid container must NOT have overflow-hidden
-    <div className="grid grid-cols-1 md:grid-cols-2 w-full relative max-w-5xl mx-auto ">
+    <div className="grid grid-cols-1 md:grid-cols-2 w-full relative max-w-5xl mx-auto">
       
       {/* LEFT COLUMN: The Cards */}
-      {/* This column will be very tall (e.g., 4 cards = 400vh) */}
       <div className="relative">
         {sortedAchievements.map((item, index) => (
           <div
             key={item.id}
-            // Each card takes up a full screen height and sticks to the top
             className="sticky top-0 h-screen flex items-center justify-center"
           >
             <motion.div
@@ -30,40 +27,46 @@ export default function Achievements({
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ margin: "-10% 0px -10% 0px", once: false }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              // z-index ensures newer cards appear on top of older ones
               style={{ zIndex: index + 1 }}
-              className="w-full max-w-sm p-8 rounded-3xl border border-white/10 bg-bg shadow-[0_-20px_50px_rgba(0,0,0,0.5)]"
+              // Added h-[480px] for fixed height and flex flex-col
+              className="w-full max-w-sm h-[480px] p-8 rounded-3xl border border-white/10 bg-[#0a0a0a] shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div className="text-4xl">🏆</div>
-                <h4 className="text-2xl font-bold leading-tight">{item.title}</h4>
                 
-                {item.organization && (
-                  <p className="text-accent font-semibold">{item.organization}</p>
-                )}
+                <div>
+                  <h4 className="text-2xl font-bold leading-tight">{item.title}</h4>
+                  {item.organization && (
+                    <p className="text-accent font-semibold mt-1">{item.organization}</p>
+                  )}
+                </div>
 
                 {item.date && (
-                  <p className="text-sm text-text/40 font-mono">
+                  <p className="text-xs text-text/40 font-mono uppercase tracking-widest">
                     {new Date(item.date).toLocaleDateString("en-US", { year: "numeric", month: "short" })}
                   </p>
                 )}
 
+                {/* flex-1 and overflow-hidden ensures description takes available space without breaking height */}
                 {item.description && (
-                  <p className="text-text/60 leading-relaxed italic text-sm">
+                  <p className="text-text/60 leading-relaxed italic text-sm line-clamp-6">
                     &quot;{item.description}&quot;
                   </p>
                 )}
+              </div>
 
-                {item.certificate_url && (
-                  <div className="pt-4">
-                    <a
-                      href={item.certificate_url}
-                      target="_blank"
-                      className="text-xs font-bold text-accent border border-accent/20 px-6 py-2 rounded-full hover:bg-accent hover:text-bg transition-all inline-block"
-                    >
-                      VIEW CREDENTIAL ↗
-                    </a>
-                  </div>
+              {/* Pushes button to the very bottom */}
+              <div className="pt-6">
+                {item.certificate_url ? (
+                  <a
+                    href={item.certificate_url}
+                    target="_blank"
+                    className="text-xs font-bold text-accent border border-accent/20 px-6 py-3 rounded-full hover:bg-accent hover:text-bg transition-all inline-block w-full text-center uppercase tracking-tighter"
+                  >
+                    View Credential ↗
+                  </a>
+                ) : (
+                  <div className="h-10" /> // Spacer if no link
                 )}
               </div>
             </motion.div>
