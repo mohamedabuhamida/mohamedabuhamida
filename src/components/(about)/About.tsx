@@ -38,6 +38,13 @@ export default function About({
     offset: ["start start", "end end"],
   });
 
+  // // 2. UNIQUE REF for Achievements
+  // const achieveRef = useRef<HTMLDivElement>(null);
+  // const { scrollYProgress: achieveScroll } = useScroll({
+  //   target: achieveRef,
+  //   offset: ["start start", "end end"],
+  // });
+
   return (
     <div id="about" className="relative bg-black">
       
@@ -57,7 +64,7 @@ export default function About({
               I&apos;m an <span className="font-semibold text-text">AI Engineer</span> focused on building intelligent systems powered by
               <span className="text-accent"> LLMs</span>, RAG, and AI pipelines.
             </p>
-            <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse text-center">
+            <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
               Scroll to explore my journey ↓
             </p>
           </div>
@@ -65,14 +72,14 @@ export default function About({
       </StickySection>
 
       {/* 2. SKILLS SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Technical" accent="Skills" />
         <div className="w-full max-w-5xl px-4">
           <Skills skills={skills} />
         </div>
       </StickySection>
 
-      {/* 3. EXPERIENCE SECTION (Internal Scroll logic) */}
+      {/* 3. EXPERIENCE SECTION (Sticky Scroll Container) */}
       <div ref={expRef} className="h-[250vh] relative">
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
           <SectionHeader title="Professional" accent="Experience" />
@@ -83,24 +90,23 @@ export default function About({
       </div>
 
       {/* 4. EDUCATION SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Academic" accent="Background" />
         <div className="w-full max-w-5xl px-4">
           <Education education={education} />
         </div>
       </StickySection>
 
-      {/* 5. ACHIEVEMENTS SECTION (CSS Sticky Stacking logic) */}
-      {/* 
-          IMPORTANT: We remove the center-alignment and max-width from the parent. 
-          The Achievements component handles its own internal sticky grid.
-      */}
-      <section id="achievements" className="relative bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
-        <Achievements achievements={achievements} />
-      </section>
+      {/* 5. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
+      <section id="achievements" className="relative bg-black">
+  {/* Add a shadow here to transition from the previous section */}
+  <div className="absolute top-0 w-full h-24 bg-linear-to-b from-black/50 to-transparent z-20 pointer-events-none" />
+  
+  <Achievements achievements={achievements} />
+</section>
 
       {/* 6. CERTIFICATIONS SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
