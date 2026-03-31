@@ -8,12 +8,8 @@ import { useState, useEffect, useRef } from "react";
 import LoadingWrapper from "@/components/LoadingWrapper";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
-<<<<<<< ours
 // Import motion and useTransform
 import { useMotionValue, useScroll, useTransform, motion } from "framer-motion";
-=======
-import { useScroll } from "framer-motion";
->>>>>>> theirs
 import {
   HeroProps,
   SkillProps,
@@ -25,12 +21,8 @@ import {
 } from "@/types";
 
 export default function Home() {
-  const heroAboutRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress: heroAboutProgress } = useScroll({
-    target: heroAboutRef,
-    offset: ["start start", "end end"],
-  });
   const [heroData, setHeroData] = useState<HeroProps["data"] | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [skills, setSkills] = useState<SkillProps[]>([]);
   const [education, setEducation] = useState<EducationProps[]>([]);
@@ -93,6 +85,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    setIsMounted(true);
     fetchHero();
     fetchSkills();
     fetchEducation();
@@ -105,40 +98,24 @@ export default function Home() {
   return (
     <LoadingWrapper isLoading={!heroData}>
       <Header />
-<<<<<<< ours
       {isMounted && heroData ? (
         <HeroAboutTransition
           data={heroData}
-=======
-
-      <main
-        ref={heroAboutRef}
-        className="relative h-[200vh] bg-linear-to-b from-bg via-primary to-bg"
-      >
-        <Hero data={heroData!} scrollYProgress={heroAboutProgress} />
-        <About
->>>>>>> theirs
           skills={skills}
           education={education}
           experience={experience}
           achievements={achievements}
           certificates={certificates}
-          scrollYProgress={heroAboutProgress}
         />
-<<<<<<< ours
       ) : (
         <div className="h-screen bg-bg" />
       )}
-=======
-      </main>
->>>>>>> theirs
       <Projects projects={projects} />
       <Contact />
       <Footer />
     </LoadingWrapper>
   );
 }
-<<<<<<< ours
 
 function HeroAboutTransition({
   data,
@@ -201,5 +178,3 @@ function HeroAboutTransition({
     </main>
   );
 }
-=======
->>>>>>> theirs
