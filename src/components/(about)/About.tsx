@@ -103,7 +103,7 @@ export default function About({
           <div className="w-full h-full max-w-6xl px-4 flex items-center justify-center">
             <Achievements
               achievements={achievements}
-              scrollYProgress={achieveScroll}
+              // scrollYProgress={achieveScroll}
             />
           </div>
         </div>
