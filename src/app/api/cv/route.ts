@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { supabaseAdmin } from "@/lib/supabase/admin"
+import { requireAuthenticatedUser } from "@/lib/auth/require-auth"
 
 const BUCKET = "cv-files"
 
@@ -59,6 +60,9 @@ export async function GET() {
    POST → Upload New CV
 ============================ */
 export async function POST(request: Request) {
+  const auth = await requireAuthenticatedUser()
+  if (auth.response) return auth.response
+
   const supabase = supabaseAdmin
   const formData = await request.formData()
   const file = formData.get("file") as File
@@ -115,6 +119,9 @@ export async function POST(request: Request) {
    PUT → Replace Current CV
 ============================ */
 export async function PUT(request: Request) {
+  const auth = await requireAuthenticatedUser()
+  if (auth.response) return auth.response
+
   return POST(request)
 }
 
@@ -122,6 +129,9 @@ export async function PUT(request: Request) {
    DELETE → Delete Active CV
 ============================ */
 export async function DELETE() {
+  const auth = await requireAuthenticatedUser()
+  if (auth.response) return auth.response
+
   const supabase = supabaseAdmin
 
   const { data, error } = await supabase

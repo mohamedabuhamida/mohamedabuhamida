@@ -12,7 +12,9 @@ export interface HeroProps {
 export interface SkillProps {
   id: number;
   name: string;
-  percentage: number;
+  level?: number;
+  percentage?: number;
+  order_index?: number;
 }
 
 export interface CertificateProps {

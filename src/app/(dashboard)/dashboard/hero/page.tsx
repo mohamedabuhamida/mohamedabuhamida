@@ -1,36 +1,36 @@
 "use client";
-import { useState, useEffect } from "react";
 
-export default function HeroDashboard() {
-  const [data, setData] = useState({ name: "", job_title: "", bio: "" });
+import CrudSectionPage from "@/components/dashboard/CrudSectionPage";
+import type { FieldConfig } from "@/components/dashboard/SectionEditor";
 
-  useEffect(() => {
-    fetch("/api/hero").then(res => res.json()).then(setData);
-  }, []);
+const heroFields: FieldConfig[] = [
+  { key: "title", label: "Title", placeholder: "AI Engineer" },
+  { key: "name", label: "Name", placeholder: "Mohamed AbuHamida" },
+  { key: "typing_texts", label: "Typing Texts (comma separated)", type: "array", placeholder: "LLM Engineer, RAG Specialist" },
+  { key: "years_experience", label: "Years of Experience", type: "number", placeholder: "3" },
+  { key: "projects_count", label: "Projects Count", type: "number", placeholder: "12" },
+  { key: "is_available", label: "Available for Work", type: "checkbox", required: false },
+];
 
-  const save = async () => {
-    await fetch("/api/hero", { method: "PUT", body: JSON.stringify(data) });
-    alert("Hero updated!");
-  };
-
+export default function HeroDashboardPage() {
   return (
-    <div className="max-w-2xl space-y-8">
-      <h2 className="text-3xl font-bold">Manage Hero Section</h2>
-      <div className="grid gap-6">
-        <div className="flex flex-col gap-2">
-           <label>Name</label>
-           <input className="bg-white/5 border p-3 rounded" value={data.name} onChange={e => setData({...data, name: e.target.value})} />
-        </div>
-        <div className="flex flex-col gap-2">
-           <label>Job Title</label>
-           <input className="bg-white/5 border p-3 rounded" value={data.job_title} onChange={e => setData({...data, job_title: e.target.value})} />
-        </div>
-        <div className="flex flex-col gap-2">
-           <label>Bio</label>
-           <textarea className="bg-white/5 border p-3 rounded h-32" value={data.bio} onChange={e => setData({...data, bio: e.target.value})} />
-        </div>
-        <button onClick={save} className="bg-accent text-bg font-bold p-4 rounded-xl">Update Hero</button>
-      </div>
-    </div>
+    <CrudSectionPage<Record<string, any>>
+      title="Hero"
+      description="Manage your hero intro, counters, and typing text."
+      endpoint="/api/hero"
+      fields={heroFields}
+      singleRecord
+      normalizeLoad={(item) => ({
+        ...item,
+        typing_texts: Array.isArray(item.typing_texts) ? item.typing_texts.join(", ") : item.typing_texts ?? "",
+      })}
+      serializeSave={(item) => ({
+        ...item,
+        typing_texts: String(item.typing_texts ?? "")
+          .split(",")
+          .map((value) => value.trim())
+          .filter(Boolean),
+      })}
+    />
   );
 }
