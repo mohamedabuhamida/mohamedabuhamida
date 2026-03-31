@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HiBriefcase } from "react-icons/hi2";
+import { HiCheck } from "react-icons/hi2";
 import { ExperienceProps } from "@/types";
 
 export default function Experience({
@@ -15,95 +15,106 @@ export default function Experience({
 
   return (
     <div className="w-full">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-10 flex items-center justify-between gap-4 border-b border-border/80 pb-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent/80">
-              Career Path
-            </p>
-            <h3 className="mt-2 text-2xl font-bold text-text md:text-3xl">
-              Experience Timeline
-            </h3>
-          </div>
-
-          <div className="hidden rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm text-muted-foreground md:block">
-            {sortedExperience.length} roles
-          </div>
+      <div className="mx-auto max-w-5xl rounded-[28px] border border-border bg-primary/5 p-6 md:p-10">
+        <div className="mb-8 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent/80">
+            Career Path
+          </p>
+          <h3 className="mt-2 text-2xl font-bold text-text md:text-3xl">
+            Experience Timeline
+          </h3>
         </div>
 
-        <div className="space-y-6">
-          {sortedExperience.map((item, index) => (
-            <motion.article
-              key={item.id}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
-              className="grid gap-4 md:grid-cols-[170px_32px_minmax(0,1fr)] md:gap-6"
-            >
-              <div className="md:pt-5">
-                <div className="inline-flex rounded-2xl border border-border bg-primary/10 px-4 py-3 text-sm font-medium text-muted-foreground">
-                  {formatDateRange(item.start_date, item.end_date, item.is_current)}
-                </div>
-              </div>
+        <div className="relative mx-auto max-w-4xl py-4">
+          <div className="absolute left-1/2 top-0 hidden h-full w-1 -translate-x-1/2 rounded-full bg-border md:block" />
 
-              <div className="relative hidden md:block">
-                <div className="absolute bottom-[-28px] left-1/2 top-0 w-px -translate-x-1/2 bg-border" />
-                <div className="relative mx-auto flex h-8 w-8 items-center justify-center rounded-full border border-accent/30 bg-bg shadow-[0_0_0_6px_rgba(78,168,222,0.08)]">
-                  <HiBriefcase className="text-sm text-accent" />
-                </div>
-              </div>
+          <div className="space-y-5 md:space-y-2">
+            {sortedExperience.map((item, index) => {
+              const isCurrent = Boolean(item.is_current);
+              const isLeft = index % 2 === 0;
 
-              <motion.div
-                whileHover={{ y: -4, scale: 1.01 }}
-                transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                className="relative overflow-hidden rounded-[28px] border border-border/80 bg-linear-to-br from-background via-background to-primary/10 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.14)]"
-              >
-                <div className="absolute inset-y-0 left-0 w-1 bg-linear-to-b from-accent via-accent/70 to-transparent" />
-
-                <div className="mb-4 flex flex-wrap items-start justify-between gap-4">
-                  <div className="space-y-2">
-                    <div>
-                      <h4 className="text-xl font-semibold text-text">
-                        {item.job_title}
-                      </h4>
-                      <p className="text-base font-medium text-accent">
-                        {item.company}
-                      </p>
-                    </div>
-
-                    {(item.location || item.employment_type) && (
-                      <div className="flex flex-wrap gap-2">
-                        {item.location && (
-                          <span className="rounded-full border border-border bg-bg/70 px-3 py-1 text-xs text-muted-foreground">
-                            {item.location}
-                          </span>
-                        )}
-                        {item.employment_type && (
-                          <span className="rounded-full border border-border bg-bg/70 px-3 py-1 text-xs text-muted-foreground">
-                            {item.employment_type}
-                          </span>
-                        )}
-                      </div>
-                    )}
+              return (
+                <motion.article
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: index * 0.08 }}
+                  className="relative md:grid md:grid-cols-[1fr_64px_1fr] md:items-center"
+                >
+                  <div
+                    className={`${
+                      isLeft
+                        ? "md:col-start-1 md:justify-self-end md:pr-6"
+                        : "md:col-start-3 md:justify-self-start md:pl-6"
+                    }`}
+                  >
+                    <TimelineCard item={item} isCurrent={isCurrent} />
                   </div>
 
-                  {item.is_current && (
-                    <span className="rounded-full bg-accent/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-                      Current
-                    </span>
-                  )}
-                </div>
+                  <div className="absolute left-0 top-6 flex items-center md:static md:col-start-2 md:justify-center">
+                    <div
+                      className={`relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-4 border-bg shadow-sm ${
+                        isCurrent
+                          ? "bg-accent text-background"
+                          : "bg-card text-foreground"
+                      }`}
+                    >
+                      <HiCheck className="text-sm" />
+                    </div>
+                  </div>
 
-                {item.description && (
-                  <p className="max-w-3xl leading-7 text-muted-foreground">
-                    {item.description}
-                  </p>
-                )}
-              </motion.div>
-            </motion.article>
-          ))}
+                  <div
+                    className={`hidden md:block ${
+                      isLeft ? "md:col-start-3" : "md:col-start-1"
+                    }`}
+                  />
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function TimelineCard({
+  item,
+  isCurrent,
+}: {
+  item: ExperienceProps;
+  isCurrent: boolean;
+}) {
+  return (
+    <div
+      className={`ml-12 max-w-md rounded-2xl border px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition-all duration-300 md:ml-0 ${
+        isCurrent
+          ? "border-accent/40 bg-accent/12"
+          : "border-border bg-card/80"
+      }`}
+    >
+      <div className="space-y-1">
+        <h4 className="text-base font-semibold text-text">{item.job_title}</h4>
+        <p
+          className={`text-sm font-medium ${
+            isCurrent ? "text-accent" : "text-muted-foreground"
+          }`}
+        >
+          {item.company}
+        </p>
+      </div>
+
+      {(item.start_date || item.end_date || item.is_current) && (
+        <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          {formatDateRange(item.start_date, item.end_date, item.is_current)}
+        </p>
+      )}
+
+      {item.description && (
+        <p className="mt-3 text-sm leading-6 text-muted-foreground">
+          {item.description}
+        </p>
+      )}
     </div>
   );
 }
@@ -126,5 +137,5 @@ function formatDateRange(
   const end = isCurrent ? "Present" : formatDate(endDate);
 
   if (start && end) return `${start} - ${end}`;
-  return start || end || "Timeline entry";
+  return start || end || "";
 }
