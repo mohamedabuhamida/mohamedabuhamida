@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Carousel from "@/components/ui/Carousel";
 import { EducationProps } from "@/types";
 
 export default function Education({
@@ -14,62 +13,82 @@ export default function Education({
   );
 
   return (
-    <Carousel
-      title="Education"
-      items={sortedEducation}
-      renderItem={(item) => (
-        <motion.div
-          whileHover={{ y: -6 }}
-          transition={{ type: "spring", stiffness: 200, damping: 18 }}
-          className="group flex flex-col h-full p-6 rounded-2xl border border-border bg-background/70 backdrop-blur-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-accent/40"
-        >
-          {/* Header */}
-          <div className="flex items-center gap-4 mb-4">
-            {item.logo_url && (
-              <img
-                src={item.logo_url}
-                alt={item.institution}
-                className="w-14 h-14 object-contain rounded-lg bg-white p-1"
-              />
-            )}
+    <div className="w-full max-w-5xl mx-auto py-10">
+      <div className="grid grid-cols-1 gap-8">
+        {sortedEducation.map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-neutral-900/30 backdrop-blur-sm p-1 transition-all duration-500 hover:border-accent/30"
+          >
+            {/* Subtle Gradient Background on Hover */}
+            <div className="absolute inset-0 bg-linear-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            <div>
-              <h4 className="text-lg font-semibold leading-snug">
-                {item.degree}
-                {item.field_of_study && (
-                  <span className="text-accent">
-                    {" "}in {item.field_of_study}
-                  </span>
+            <div className="relative flex flex-col md:flex-row gap-8 p-8 lg:p-10">
+              
+              {/* LEFT SIDE: INSTITUTION LOGO & DATES */}
+              <div className="flex flex-col items-center md:items-start md:w-1/4 shrink-0 space-y-4">
+                <div className="relative p-4 bg-white rounded-2xl shadow-xl shadow-black/20 group-hover:scale-105 transition-transform duration-500">
+                  {item.logo_url ? (
+                    <img
+                      src={item.logo_url}
+                      alt={item.institution}
+                      className="w-20 h-20 md:w-24 md:h-24 object-contain"
+                    />
+                  ) : (
+                    <div className="w-24 h-24 flex items-center justify-center bg-accent/10 text-accent text-4xl">
+                      🎓
+                    </div>
+                  )}
+                </div>
+                <div className="text-center md:text-left">
+                   <p className="text-xs font-mono text-text/40 uppercase tracking-widest">
+                     Timeline
+                   </p>
+                   <p className="text-sm font-semibold text-text/80">
+                     {formatDate(item.start_date)} — {formatDate(item.end_date)}
+                   </p>
+                </div>
+              </div>
+
+              {/* RIGHT SIDE: CONTENT */}
+              <div className="flex-1 space-y-6">
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-text">
+                      {item.degree}
+                    </h3>
+                    {item.grade && (
+                      <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-tighter bg-accent text-bg rounded-md">
+                        Grade: {item.grade}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xl text-accent font-medium leading-tight">
+                    {item.field_of_study}
+                  </p>
+                  <p className="text-lg text-text/60 font-semibold italic">
+                    {item.institution}
+                  </p>
+                </div>
+
+                {item.description && (
+                  <div className="relative">
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent/20 rounded-full" />
+                    <p className="pl-6 text-text/50 leading-relaxed text-sm md:text-base italic">
+                      {item.description}
+                    </p>
+                  </div>
                 )}
-              </h4>
-
-              <p className="text-muted-foreground">
-                {item.institution}
-              </p>
+              </div>
             </div>
-          </div>
-
-          {/* Dates */}
-          <p className="text-sm text-muted-foreground mb-2">
-            {formatDate(item.start_date)} — {formatDate(item.end_date)}
-          </p>
-
-          {/* GPA Badge */}
-          {item.grade && (
-            <span className="inline-block px-3 py-1 text-xs font-semibold bg-primary/10 text-accent rounded-full mb-3 w-fit">
-              🎓 {item.grade}
-            </span>
-          )}
-
-          {/* Description */}
-          {item.description && (
-            <p className="text-muted-foreground leading-relaxed mt-auto">
-              {item.description}
-            </p>
-          )}
-        </motion.div>
-      )}
-    />
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 }
 
