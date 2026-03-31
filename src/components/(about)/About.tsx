@@ -51,27 +51,34 @@ export default function About({
           </div>
         </Reveal>
         <Reveal delay={0.2}>
-          <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
-            <p>
-              I&apos;m an{" "}
-              <span className="font-semibold text-text">AI Engineer</span>{" "}
-              specializing in building intelligent, production-ready systems
-              using
-              <span className="text-accent"> LLMs</span>, RAG architectures, and
-              scalable AI pipelines.
-            </p>
+  <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
+    <p>
+      I&apos;m an{" "}
+      <span className="font-semibold text-text">AI Engineer</span>{" "}
+      passionate about building intelligent, production-ready systems powered by
+      <span className="text-accent"> LLMs</span>, RAG architectures, and scalable AI pipelines.
+      I focus on designing end-to-end solutions — from data preprocessing and model development
+      to deployment and real-world integration.
+    </p>
 
-            <p>
-              Passionate about transforming data into actionable insights and
-              deploying real-world AI solutions across computer vision, NLP, and
-              automation systems.
-            </p>
+    <p>
+      My experience spans across computer vision, natural language processing, and AI-driven automation,
+      where I&apos;ve developed systems that solve real-world problems with measurable impact.
+      I enjoy working at the intersection of engineering and intelligence — turning complex ideas into
+      practical, scalable applications.
+    </p>
 
-            <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
-              Scroll to explore my journey ↓
-            </p>
-          </div>
-        </Reveal>
+    <p>
+      Beyond building models, I care about creating complete AI products — systems that are reliable,
+      efficient, and ready for real users. Whether it&apos;s deploying ML models, integrating APIs,
+      or designing intelligent agents, I aim to deliver solutions that go beyond experimentation into production.
+    </p>
+
+    <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
+      Scroll to explore my journey ↓
+    </p>
+  </div>
+</Reveal>
       </StickySection>
 
       {/* 2. SKILLS SECTION */}
