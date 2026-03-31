@@ -53,7 +53,7 @@ export default function Experience({
 
                   <div className="absolute left-0 top-6 flex items-center md:static md:col-start-2 md:justify-center">
                     <div
-                      className={`relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#0B1220] shadow-[0_0_0_6px_#0B1220] ${
+                      className={`relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#0B1220]  ${
                         isCurrent
                           ? "bg-accent text-background"
                           : "bg-[#132949] text-white"
