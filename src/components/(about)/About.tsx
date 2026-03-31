@@ -80,7 +80,7 @@ export default function About({
       </StickySection>
 
       {/* 2. SKILLS SECTION */}
-      <StickySection className="bg-[#0a0a0a] shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Technical" accent="Skills" />
         <div className="w-full max-w-5xl px-4">
           <Skills skills={skills} />
