@@ -14,9 +14,8 @@ export default function Hero({
 }: HeroProps & {
   scrollYProgress: MotionValue<number>;
 }) {
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
-  const heroRotate = useTransform(scrollYProgress, [0, 1], [0, -4]);
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const heroRotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -32]);
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 28]);
   const gridOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [0.22, 0.12, 0.05]);
@@ -24,7 +23,7 @@ export default function Hero({
   return (
     <section id="home" className="relative h-screen bg-linear-to-tr from-bg to-primary">
       <motion.div
-        style={{ scale: heroScale, rotate: heroRotate, y: heroY }}
+        style={{ scale: heroScale, rotate: heroRotate }}
         className="sticky top-0 flex h-screen items-center justify-center overflow-hidden"
       >
         <div className="absolute inset-0 bg-linear-to-tr from-bg to-primary" />
