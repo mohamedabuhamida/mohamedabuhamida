@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { CertificateProps } from "@/types";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { HiOutlineExternalLink } from "react-icons/hi";
@@ -24,7 +25,7 @@ export default function Certifications({
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
