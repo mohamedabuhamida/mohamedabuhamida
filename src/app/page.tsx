@@ -30,15 +30,59 @@ export default function Home() {
   const [achievements, setAchievements] = useState<AchievementProps[]>([]);
   const [certificates, setCertificates] = useState<CertificateProps[]>([]);
   const [projects, setProjects] = useState<ProjectProps[]>([]);
-  
+
   // Logic for fetching data...
-  const fetchHero = async () => { /* ... */ try { const res = await fetch("/api/hero"); const data = await res.json(); setHeroData(data); } catch (e) { setError("Failed"); } };
-  const fetchSkills = async () => { /* ... */ try { const res = await fetch("/api/skills"); const data = await res.json(); setSkills(data); } catch (e) { } };
-  const fetchEducation = async () => { /* ... */ try { const res = await fetch("/api/education"); const data = await res.json(); setEducation(data); } catch (e) { } };
-  const fetchExperience = async () => { /* ... */ try { const res = await fetch("/api/experience"); const data = await res.json(); setExperience(data); } catch (e) { } };
-  const fetchAchievements = async () => { /* ... */ try { const res = await fetch("/api/achievements"); const data = await res.json(); setAchievements(data); } catch (e) { } };
-  const fetchCertificates = async () => { /* ... */ try { const res = await fetch("/api/certificates"); const data = await res.json(); setCertificates(data); } catch (e) { } };
-  const fetchProjects = async () => { /* ... */ try { const res = await fetch("/api/projects"); const data = await res.json(); setProjects(data); } catch (e) { } };
+  const fetchHero = async () => {
+    try {
+      const res = await fetch("/api/hero");
+      const data = await res.json();
+      setHeroData(data);
+    } catch (e) {
+      setError("Failed");
+    }
+  };
+  const fetchSkills = async () => {
+    try {
+      const res = await fetch("/api/skills");
+      const data = await res.json();
+      setSkills(data);
+    } catch (e) {}
+  };
+  const fetchEducation = async () => {
+    try {
+      const res = await fetch("/api/education");
+      const data = await res.json();
+      setEducation(data);
+    } catch (e) {}
+  };
+  const fetchExperience = async () => {
+    try {
+      const res = await fetch("/api/experience");
+      const data = await res.json();
+      setExperience(data);
+    } catch (e) {}
+  };
+  const fetchAchievements = async () => {
+    try {
+      const res = await fetch("/api/achievements");
+      const data = await res.json();
+      setAchievements(data);
+    } catch (e) {}
+  };
+  const fetchCertificates = async () => {
+    try {
+      const res = await fetch("/api/certificates");
+      const data = await res.json();
+      setCertificates(data);
+    } catch (e) {}
+  };
+  const fetchProjects = async () => {
+    try {
+      const res = await fetch("/api/projects");
+      const data = await res.json();
+      setProjects(data);
+    } catch (e) {}
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -64,7 +108,7 @@ export default function Home() {
           certificates={certificates}
         />
       ) : (
-        <div className="h-screen bg-bg" /> 
+        <div className="h-screen bg-bg" />
       )}
       <Projects projects={projects} />
       <Contact />
@@ -89,7 +133,7 @@ function HeroAboutTransition({
   certificates: CertificateProps[];
 }) {
   const containerRef = useRef<HTMLElement | null>(null);
-  
+
   // Hook into the scroll progress of the 200vh container
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -105,10 +149,7 @@ function HeroAboutTransition({
   const aboutRotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
 
   return (
-    <main
-      ref={containerRef}
-      className="relative h-[200vh] bg-black" 
-    >
+    <main ref={containerRef} className="relative h-[200vh] bg-black">
       {/* SECTION 1: HERO (Sticky) */}
       <motion.section
         style={{ scale: heroScale, rotate: heroRotate }}
