@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import SectionEditor from "@/components/dashboard/SectionEditor";
 
+
 export default function ProjectsDashboard() {
   const [projects, setProjects] = useState([]);
 
