@@ -102,7 +102,7 @@ export default function About({
       </div>
 
       {/* 4. EDUCATION SECTION */}
-      <StickySection className="bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Academic" accent="Background" />
         <div className="w-full max-w-5xl px-4">
           <Education education={education} />
@@ -110,7 +110,7 @@ export default function About({
 
 
       </StickySection>
-      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)] ">
+      <StickySection className="bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] ">
         <SectionHeader title="Achievements" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Achievements achievements={achievements} />{" "}
@@ -118,7 +118,7 @@ export default function About({
       </StickySection>
 
       {/* 5. ACHIEVEMENTS & CERTIFICATES */}
-      <StickySection className="bg-[#0a0a0a] shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
