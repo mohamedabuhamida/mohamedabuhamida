@@ -6,7 +6,6 @@ import { MdWorkHistory } from "react-icons/md";
 import { TbTopologyStar3 } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import HorizontalScrollSection from "@/components/ui/HorizontalScroll";
 
 import Tabs from "./Tabs";
 

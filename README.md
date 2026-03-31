@@ -1,159 +1,119 @@
-# 🚀 Mohamed AbuHamida – Cinematic Portfolio
+<!-- Animated Header -->
+<h1 align="center">Hi , I'm Mohamed AbuHamida</h1>
+<h3 align="center">AI Engineer | LLM Systems | RAG Architectures | Computer Vision</h3>
 
-A scroll-driven, immersive portfolio built with **Next.js**, **Framer Motion**, and **Supabase**.
-
-This project showcases selected works in Artificial Intelligence, Machine Learning, and Modern Web Development through cinematic interactions and horizontal scroll experiences.
-
----
-
-## ✨ Highlights
-
-* 🎬 Scroll-based horizontal project gallery
-* 🧠 AI-focused project presentation
-* 🎥 Smooth motion powered by Framer Motion
-* 🌑 Premium dark UI with modern layout
-* 📱 Fully responsive design
-* ⚡ Optimized performance with Next.js App Router
-* 🗄 Dynamic data from Supabase
+<p align="center">
+<img src="https://readme-typing-svg.herokuapp.com/?lines=AI+Engineer;LLM+Systems+Developer;RAG+Architecture+Builder;Computer+Vision+Engineer&center=true&width=500&height=50">
+</p>
 
 ---
 
-## 🛠 Tech Stack
+#  About Me
 
-**Framework:** Next.js (App Router)
-**Styling:** Tailwind CSS
-**Animation:** Framer Motion
-**Database & Storage:** Supabase
-**Icons:** Lucide React
-**Deployment:** Vercel
+ AI Engineer passionate about building **production-ready AI systems**
 
----
+ Specialized in:
 
-## 📂 Project Structure
+- Large Language Models (LLMs)
+- Retrieval-Augmented Generation (RAG)
+- AI Agents & LangChain systems
+- Computer Vision applications
+- End-to-end AI deployment
 
-```
-components/
-  ui/
-  sections/
-    ProjectsSection.tsx
-    Achievements.tsx
-    Certifications.tsx
-    Experience.tsx
-    Education.tsx
-    ContactSection.tsx
-
-types/
-  index.ts
-```
+ I enjoy transforming **research ideas into real-world AI products**
 
 ---
 
-## 🎬 Projects Section Architecture
+#  Portfolio
 
-The Projects section uses vertical scroll to drive horizontal animation.
+<p align="center">
 
-### Core Concept
+<a href="https://mohamedabuhamida.vercel.app">
+<img src="https://img.shields.io/badge/Portfolio-Visit%20Website-blue?style=for-the-badge">
+</a>
 
-* Vertical scroll controls horizontal translation.
-* Sticky container keeps gallery centered.
-* `useScroll` + `useTransform` drive movement.
-* Dynamic width calculation ensures smooth transitions.
+<a href="https://linkedin.com/in/mohamedabuhamida">
+<img src="https://img.shields.io/badge/LinkedIn-Mohamed%20AbuHamida-blue?style=for-the-badge&logo=linkedin">
+</a>
 
-### Core Logic
+<a href="mailto:mohamedabuhamida3@gmail.com">
+<img src="https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail">
+</a>
 
-```ts
-const { scrollYProgress } = useScroll({
-  target: containerRef,
-  offset: ["start start", "end end"],
-})
-
-const x = useTransform(
-  scrollYProgress,
-  [0, 1],
-  [0, -totalDistance]
-)
-```
+</p>
 
 ---
 
-## 🗄 Supabase Projects Schema
+#  Featured AI Projects
 
-Each project includes:
+###  AI Career Automation System
+LLM-powered AI agent that analyzes CVs, performs job matching using **RAG pipelines**, and generates tailored job applications.
 
-* Title
-* Tagline
-* Description
-* Technologies[]
-* Main Image
-* Hero Image
-* Accent Color
-* GitHub Link
-* Like System
+**Tech:** LangChain • FastAPI • Next.js • Gemini/OpenAI APIs • Docker
 
 ---
 
-## 🧠 Design Philosophy
+###  Smart Shopping Cart
+Computer vision system using **YOLO** for real-time product recognition and automated retail experience.
 
-This portfolio avoids traditional card layouts.
-
-Instead, it focuses on:
-
-* Immersive storytelling
-* Motion-driven presentation
-* Exhibition-style project browsing
-* Clean minimal interface
-* Strong AI identity
-
-The goal is not just to display projects — but to present them as experiences.
+**Tech:** YOLO • OpenCV • Python
 
 ---
 
-## 📸 Featured Projects
+###  Egyptian Car Plate Recognition
+Deep learning pipeline for **Arabic license plate detection and OCR recognition**.
 
-* 🛒 Smart Shopping Cart (AI + IoT)
-* 🏥 Medicare – AI Medical Diagnosis System
-* ☄ Asteroid Hazard Prediction
-* 🪨 Mining Process Flotation Analysis
-* 🛍 Customer Segmentation Analysis
-* 🍕 Pizza Hut Modern Web App
+**Tech:** YOLOv8 • EasyOCR • CNN
 
 ---
 
-## 🧑‍💻 Getting Started
+#  Tech Stack
 
-```bash
-git clone https://github.com/mohamedabuhamida/portfolio.git
-cd portfolio
-npm install
-npm run dev
-```
+### AI / Machine Learning
 
----
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
 
-## 🌍 Live Demo
+### LLM & AI Systems
 
-Add your deployed link here:
+LangChain • RAG • Prompt Engineering • Vector Databases • AI Agents
 
-```
-https://mohamedabuhamida.vercel.app
-```
+### Backend
 
----
+FastAPI • Flask • REST APIs • Docker • Linux
 
-## 📬 Contact
+### Frontend
 
-📧 [mohamedabuhamida3@gmail.com](mailto:mohamedabuhamida3@gmail.com)
-💼 LinkedIn: [https://www.linkedin.com/in/mohamedabuhamida](https://www.linkedin.com/in/mohamedabuhamida)
-🧑‍💻 GitHub: [https://github.com/mohamedabuhamida](https://github.com/mohamedabuhamida)
+Next.js • React • TypeScript
 
 ---
 
-## 🏆 Author
+#  GitHub Stats
 
-**Mohamed Ramdan AbuHamida**
-Artificial Intelligence Engineer
-Computer Vision & Machine Learning Specialist
+<p align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=mohamedabuhamida&show_icons=true&theme=tokyonight&hide_border=true"/>
+
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=mohamedabuhamida&theme=tokyonight&hide_border=true"/>
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mohamedabuhamida&layout=compact&theme=tokyonight&hide_border=true"/>
+
+</p>
+
+---
+#### 💎 **Let’s Connect**
+
+* 📧 Email: [mohamedabuhamida3@gmail.com](mailto:mohamedabuhamida3@gmail.com)
+* 💼 LinkedIn: [Mohammed AbuHamida](https://www.linkedin.com/in/mohamedabuhamida)
+* 🌐 Portfolio: [mohamedabuhamida.vercel.app](https://mohamedabuhamida.vercel.app/)
+* 👨‍💻 GitHub: [github.com/mohamedabuhamida](https://github.com/mohamedabuhamida)
+* 🧰 Freelance Profiles:
+  [Upwork](https://www.upwork.com/freelancers/~0191d02b8deff4294c) |
+  [Mostaql](https://mostaql.com/u/Mohammed_145) |
+  [Khamsat](https://khamsat.com/user/m_abuhamida)
 
 ---
 
-> "Building intelligent systems that merge AI and modern web technologies."
+ If you like my work, feel free to **star the repositories**

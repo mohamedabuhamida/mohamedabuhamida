@@ -45,7 +45,7 @@ export default function ProjectCard({
 
   return (
     <div
-      className="group relative h-[500px] rounded-2xl overflow-hidden bg-neutral-900 transition-all duration-500"
+      className="group relative h-125 rounded-2xl overflow-hidden bg-neutral-900 transition-all duration-500"
       style={{
         border: `1px solid ${borderColor}88`,
         boxShadow: `0 0 40px ${borderColor}33`,
@@ -57,7 +57,7 @@ export default function ProjectCard({
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
 
       <div className="absolute bottom-8 left-8 z-10">
         <span className="text-sm font-mono text-white/50 block mb-2">

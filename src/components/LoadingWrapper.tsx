@@ -116,7 +116,7 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-bg via-primary to-bg font-sans">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-tr from-bg via-primary to-bg font-sans">
         <div className="relative flex flex-col items-center gap-8">
           {/* Glow */}
           <div
@@ -138,7 +138,7 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
                   priority
                   className="object-contain relative z-10 drop-shadow-2xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-accent/20 to-transparent rounded-full blur-sm"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-accent/20 to-transparent rounded-full blur-sm"></div>
               </div>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
           <div className="relative">
             <p className="text-text-muted text-lg tracking-wider flex items-center">
               <span>
-                <span className="text-accent">&gt;</span> INITIALIZING Profiel
+                <span className="text-accent">&gt;</span> INITIALIZING Profile
               </span>
               <span ref={cursorRef} className="text-accent ml-1">
                 _
@@ -155,7 +155,7 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
             </p>
 
             <div className="mt-4 w-48 h-1 bg-primary/50 rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-accent via-accent/80 to-accent rounded-full animate-progress"></div>
+              <div className="h-full bg-linear-to-r from-accent via-accent/80 to-accent rounded-full animate-progress"></div>
             </div>
           </div>
 
