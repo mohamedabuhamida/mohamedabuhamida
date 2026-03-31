@@ -58,7 +58,7 @@ export default function Certifications({
             className="group relative flex flex-col h-full p-6 rounded-2xl border border-white/10 bg-neutral-900/40 backdrop-blur-md transition-all duration-300 hover:border-accent/50 hover:bg-neutral-900/60 shadow-xl"
           >
             {/* Top Glow Effect on Hover */}
-            <div className="absolute inset-x-0 -top-px h-px w-2/3 mx-auto bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-x-0 -top-px h-px w-2/3 mx-auto bg-linear-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <div className="flex items-start justify-between mb-6">
               {item.logo_url ? (

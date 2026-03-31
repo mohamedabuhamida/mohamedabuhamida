@@ -128,7 +128,7 @@ export default function SectionEditor<T extends Record<string, any>>({
               {!isLoading && data.map((item, idx) => (
                 <tr key={(item.id as string | number) ?? idx} className="hover:bg-white/5 transition-colors group">
                   {previewFields.map((f) => (
-                    <td key={f.key} className="p-5 text-sm text-text/80 max-w-[220px] truncate">
+                    <td key={f.key} className="p-5 text-sm text-text/80 max-w-55 truncate">
                       {f.type === "image" && item[f.key] ? (
                         <img src={String(item[f.key])} alt={f.label} className="h-10 w-10 rounded object-cover border border-white/10" />
                       ) : (

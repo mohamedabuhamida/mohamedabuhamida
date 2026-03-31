@@ -31,7 +31,7 @@ export default function Experience({
         {/* The moving content */}
         <motion.div className="relative px-2 py-6 md:px-6 md:py-10">
           {/* The Vertical Line */}
-          <div className="absolute left-6 md:left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-gradient-to-b from-accent/50 via-accent/20 to-transparent" />
+          <div className="absolute left-6 md:left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-linear-to-b from-accent/50 via-accent/20 to-transparent" />
 
           <div className="space-y-12">
             {sortedExperience.map((item, index) => {
