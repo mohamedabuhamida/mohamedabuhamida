@@ -51,34 +51,39 @@ export default function About({
           </div>
         </Reveal>
         <Reveal delay={0.2}>
-  <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
-    <p>
-      I&apos;m an{" "}
-      <span className="font-semibold text-text">AI Engineer</span>{" "}
-      passionate about building intelligent, production-ready systems powered by
-      <span className="text-accent"> LLMs</span>, RAG architectures, and scalable AI pipelines.
-      I focus on designing end-to-end solutions — from data preprocessing and model development
-      to deployment and real-world integration.
-    </p>
+          <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
+            <p>
+              I&apos;m an{" "}
+              <span className="font-semibold text-text">AI Engineer</span>{" "}
+              passionate about building intelligent, production-ready systems
+              powered by
+              <span className="text-accent"> LLMs</span>, RAG architectures, and
+              scalable AI pipelines. I focus on designing end-to-end solutions —
+              from data preprocessing and model development to deployment and
+              real-world integration.
+            </p>
 
-    <p>
-      My experience spans across computer vision, natural language processing, and AI-driven automation,
-      where I&apos;ve developed systems that solve real-world problems with measurable impact.
-      I enjoy working at the intersection of engineering and intelligence — turning complex ideas into
-      practical, scalable applications.
-    </p>
+            <p>
+              My experience spans across computer vision, natural language
+              processing, and AI-driven automation, where I&apos;ve developed
+              systems that solve real-world problems with measurable impact. I
+              enjoy working at the intersection of engineering and intelligence
+              — turning complex ideas into practical, scalable applications.
+            </p>
 
-    <p>
-      Beyond building models, I care about creating complete AI products — systems that are reliable,
-      efficient, and ready for real users. Whether it&apos;s deploying ML models, integrating APIs,
-      or designing intelligent agents, I aim to deliver solutions that go beyond experimentation into production.
-    </p>
+            <p>
+              Beyond building models, I care about creating complete AI products
+              — systems that are reliable, efficient, and ready for real users.
+              Whether it&apos;s deploying ML models, integrating APIs, or
+              designing intelligent agents, I aim to deliver solutions that go
+              beyond experimentation into production.
+            </p>
 
-    <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
-      Scroll to explore my journey ↓
-    </p>
-  </div>
-</Reveal>
+            <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
+              Scroll to explore my journey ↓
+            </p>
+          </div>
+        </Reveal>
       </StickySection>
 
       {/* 2. SKILLS SECTION */}
@@ -106,20 +111,22 @@ export default function About({
           <Education education={education} />
         </div>
       </StickySection>
-      
+
       {/* 5. CERTIFICATIONS SECTION */}
       <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
-        <div className="w-full max-w-5xl px-4">
+        <div className="w-full max-w-6xl px-4 overflow-y-auto max-h-[80vh] no-scrollbar">
           <Certifications certificates={certificates} />
         </div>
       </StickySection>
 
       {/* 6. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
-      <section id="achievements" className="relative bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <section
+        id="achievements"
+        className="relative bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]"
+      >
         <Achievements achievements={achievements} />
       </section>
-
     </div>
   );
 }
