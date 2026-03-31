@@ -33,11 +33,13 @@ export default function About({
 }) {
   // --- EXPERIENCE SCROLL LOGIC ---
   // We track the scroll specifically for the Experience container
-  const experienceContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: experienceScrollProgress } = useScroll({
-    target: experienceContainerRef,
-    offset: ["start start", "end end"],
-  });
+  // 1. Ref for Experience (existing)
+  const expRef = useRef(null);
+  const { scrollYProgress: expScroll } = useScroll({ target: expRef, offset: ["start start", "end end"] });
+
+  // 2. Ref for Achievements (NEW)
+  const achieveRef = useRef(null);
+  const { scrollYProgress: achieveScroll } = useScroll({ target: achieveRef, offset: ["start start", "end end"] });
 
   return (
     <div id="about" className="relative bg-black">
