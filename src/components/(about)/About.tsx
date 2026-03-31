@@ -42,76 +42,90 @@ export default function About({
     <div id="about" className="relative bg-black">
       {/* 1. INTRO SECTION */}
       <StickySection className="bg-bg border-t border-white/5">
-        <div className="max-w-4xl mx-auto w-full">
-          <Reveal>
-            <div className="mb-8 text-center">
-              <h2 className="mb-4 text-4xl font-bold md:text-5xl">
-                About <span className="text-accent">Me</span>
-              </h2>
-              <div className="mx-auto h-1.5 w-20 rounded-full bg-accent"></div>
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="space-y-6 text-center leading-relaxed text-text-muted text-lg">
-              <p>
-                I&apos;m an <span className="font-semibold text-text">AI Engineer</span> passionate about building intelligent, production-ready systems powered by
-                <span className="text-accent"> LLMs</span>, RAG architectures, and scalable AI pipelines.
-              </p>
-              <p>
-                My experience spans across computer vision, NLP, and AI-driven automation. I enjoy turning complex ideas into practical, scalable applications.
-              </p>
-              <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
-                Scroll to explore my journey ↓
-              </p>
-            </div>
-          </Reveal>
-        </div>
+        <Reveal>
+          <div className="mb-8 text-center">
+            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+              About <span className="text-accent">Me</span>
+            </h2>
+            <div className="mx-auto h-1.5 w-20 rounded-full bg-accent"></div>
+          </div>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
+            <p>
+              I&apos;m an{" "}
+              <span className="font-semibold text-text">AI Engineer</span>{" "}
+              passionate about building intelligent, production-ready systems
+              powered by
+              <span className="text-accent"> LLMs</span>, RAG architectures, and
+              scalable AI pipelines. I focus on designing end-to-end solutions —
+              from data preprocessing and model development to deployment and
+              real-world integration.
+            </p>
+
+            <p>
+              My experience spans across computer vision, natural language
+              processing, and AI-driven automation, where I&apos;ve developed
+              systems that solve real-world problems with measurable impact. I
+              enjoy working at the intersection of engineering and intelligence
+              — turning complex ideas into practical, scalable applications.
+            </p>
+
+            <p>
+              Beyond building models, I care about creating complete AI products
+              — systems that are reliable, efficient, and ready for real users.
+              Whether it&apos;s deploying ML models, integrating APIs, or
+              designing intelligent agents, I aim to deliver solutions that go
+              beyond experimentation into production.
+            </p>
+
+            <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
+              Scroll to explore my journey ↓
+            </p>
+          </div>
+        </Reveal>
       </StickySection>
 
       {/* 2. SKILLS SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <div className="max-w-5xl mx-auto w-full flex flex-col items-center">
           <SectionHeader title="Technical" accent="Skills" />
-          <div className="w-full">
+          <div className="w-full ">
             <Skills skills={skills} />
           </div>
         </div>
       </StickySection>
 
-      {/* 3. EXPERIENCE SECTION (Internal Scroll) */}
+      {/* 3. EXPERIENCE SECTION (Sticky Scroll Container) */}
       <div ref={expRef} className="h-[250vh] relative">
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
           <SectionHeader title="Professional" accent="Experience" />
-          <div className="w-full h-full max-w-5xl mx-auto">
+          <div className="w-full h-full max-w-5xl">
             <Experience experience={experience} scrollYProgress={expScroll} />
           </div>
         </div>
       </div>
 
       {/* 4. EDUCATION SECTION */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
-        <div className="max-w-5xl mx-auto w-full flex flex-col items-center">
-          <SectionHeader title="Academic" accent="Background" />
-          <div className="w-full">
-            <Education education={education} />
-          </div>
+      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+        <SectionHeader title="Academic" accent="Background" />
+        <div className="w-full max-w-5xl px-4">
+          <Education education={education} />
         </div>
       </StickySection>
 
       {/* 5. CERTIFICATIONS SECTION */}
       <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
-        <div className="max-w-6xl mx-auto w-full flex flex-col items-center">
-          <SectionHeader title="Certifications" accent="" />
-          <div className="w-full overflow-y-auto max-h-[70vh] no-scrollbar px-4">
-            <Certifications certificates={certificates} />
-          </div>
+        <SectionHeader title="Certifications" accent="" />
+        <div className="w-full max-w-6xl px-4 overflow-y-auto max-h-[80vh] no-scrollbar">
+          <Certifications certificates={certificates} />
         </div>
       </StickySection>
 
-      {/* 6. ACHIEVEMENTS SECTION (Sticky Cards) */}
+      {/* 6. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
       <section
         id="achievements"
-        className="relative bg-linear-to-tr from-bg to-primary/10 shadow-[0_-50px_50px_rgba(0,0,0,0.8)]"
+        className="relative bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]"
       >
         <Achievements achievements={achievements} />
       </section>
@@ -119,7 +133,7 @@ export default function About({
   );
 }
 
-// --- REUSABLE SUB-COMPONENTS ---
+// --- SUB-COMPONENTS ---
 
 function StickySection({
   children,
@@ -130,13 +144,9 @@ function StickySection({
 }) {
   return (
     <section
-      className={`sticky top-0 h-screen w-full flex items-center justify-center px-6 md:px-12 overflow-hidden ${className}`}
+      className={`sticky top-0 h-screen w-full flex flex-col items-center justify-center p-6 md:p-12 lg:p-24 overflow-hidden ${className}`}
     >
-      {/* 
-          This inner div ensures that whatever children you pass 
-          are treated as a single block that stays centered 
-      */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full flex flex-col items-center">
         {children}
       </div>
     </section>
@@ -146,8 +156,8 @@ function StickySection({
 function SectionHeader({ title, accent }: { title: string; accent: string }) {
   return (
     <Reveal>
-      <div className="mb-10 text-center w-full">
-        <h2 className="text-2xl md:text-4xl font-bold text-text">
+      <div className="mb-10 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold">
           {title} <span className="text-accent">{accent}</span>
         </h2>
         <div className="mx-auto mt-2 h-1 w-12 rounded-full bg-accent/50" />
