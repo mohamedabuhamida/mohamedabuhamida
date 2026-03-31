@@ -51,7 +51,7 @@ export default function About({
           </div>
         </Reveal>
         <Reveal delay={0.2}>
-          <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
+          <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-base md:text-lg">
             <p>
               I&apos;m an{" "}
               <span className="font-semibold text-text">AI Engineer</span>{" "}
@@ -97,10 +97,10 @@ export default function About({
       </StickySection>
 
       {/* 3. EXPERIENCE SECTION (Sticky Scroll Container) */}
-      <div ref={expRef} className="h-[250vh] relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
+      <div ref={expRef} className="relative lg:h-[250vh]">
+        <div className="w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-visible px-4 py-16 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:px-0 lg:py-0">
           <SectionHeader title="Professional" accent="Experience" />
-          <div className="w-full h-full max-w-5xl">
+          <div className="w-full max-w-5xl lg:h-full">
             <Experience experience={experience} scrollYProgress={expScroll} />
           </div>
         </div>
@@ -117,7 +117,7 @@ export default function About({
       {/* 5. CERTIFICATIONS SECTION */}
       <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
-        <div className="w-full max-w-6xl px-4 overflow-y-auto max-h-[80vh] no-scrollbar">
+        <div className="w-full max-w-6xl px-2 md:px-4 lg:overflow-y-auto lg:max-h-[80vh] no-scrollbar">
           <Certifications certificates={certificates} />
         </div>
       </StickySection>
@@ -144,7 +144,7 @@ function StickySection({
 }) {
   return (
     <section
-      className={`sticky top-0 h-screen w-full flex flex-col items-center justify-center p-6 md:p-12 lg:p-24 overflow-hidden ${className}`}
+      className={`w-full flex flex-col items-center justify-center px-4 py-16 md:p-12 lg:sticky lg:top-0 lg:h-screen lg:p-24 lg:overflow-hidden ${className}`}
     >
       <div className="relative z-10 w-full flex flex-col items-center">
         {children}
