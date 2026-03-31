@@ -7,7 +7,7 @@ import { MdWorkHistory } from "react-icons/md";
 import { FaGraduationCap, FaTrophy } from "react-icons/fa";
 import { LiaCertificateSolid } from "react-icons/lia";
 
-const tabs = [
+export const aboutTabs = [
   { key: "skills", label: "Skills", icon: TbTopologyStar3 },
   { key: "experience", label: "Experience", icon: MdWorkHistory },
   { key: "education", label: "Education", icon: FaGraduationCap },
@@ -15,7 +15,13 @@ const tabs = [
   { key: "certificates", label: "Certificates", icon: LiaCertificateSolid },
 ];
 
-export default function Tabs({ visable, setVisable }: any) {
+export default function Tabs({
+  visable,
+  setVisable,
+}: {
+  visable: string;
+  setVisable: (value: string) => void;
+}) {
   const [tooltip, setTooltip] = useState({
     visible: false,
     x: 0,
@@ -26,7 +32,7 @@ export default function Tabs({ visable, setVisable }: any) {
   return (
     <>
       <div className="flex  text-left gap-4">
-        {tabs.map((tab) => {
+        {aboutTabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = visable === tab.key;
 

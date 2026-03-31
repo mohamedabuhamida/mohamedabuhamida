@@ -10,7 +10,7 @@ export default function Experience({
   experience: ExperienceProps[];
 }) {
   const sortedExperience = [...experience].sort(
-    (a, b) => (b.order_index ?? 0) - (a.order_index ?? 0)
+    (a, b) => (b.order_index ?? 0) - (a.order_index ?? 0),
   );
 
   return (
@@ -59,7 +59,9 @@ export default function Experience({
                           : "bg-[#132949] text-white"
                       }`}
                     >
-                      <HiCheck className={`${isCurrent ? "text-sm" : "text-xs"} opacity-95`} />
+                      <HiCheck
+                        className={`${isCurrent ? "text-sm" : "text-xs"} opacity-95`}
+                      />
                     </div>
                   </div>
 
@@ -131,7 +133,7 @@ function formatDate(date?: string) {
 function formatDateRange(
   startDate?: string,
   endDate?: string,
-  isCurrent?: boolean
+  isCurrent?: boolean,
 ) {
   const start = formatDate(startDate);
   const end = isCurrent ? "Present" : formatDate(endDate);
