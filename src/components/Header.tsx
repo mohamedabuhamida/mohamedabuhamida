@@ -46,13 +46,16 @@ export default function Header() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // When a section enters the "middle" 40% of the screen
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
           }
         });
       },
       {
-        rootMargin: "-40% 0px -40% 0px",
+        // Adjust rootMargin to trigger the change earlier or later
+        // This setting triggers when the section reaches 40% from the top
+        rootMargin: "-20% 0px -70% 0px", 
         threshold: 0,
       },
     );
