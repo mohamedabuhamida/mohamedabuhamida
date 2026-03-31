@@ -26,7 +26,7 @@ export default function Experience({
         </div>
 
         <div className="relative mx-auto max-w-4xl py-4">
-          <div className="absolute left-1/2 top-0 hidden h-full w-1 -translate-x-1/2 rounded-full bg-border md:block" />
+          {/* <div className="absolute left-1/2 top-0 hidden h-full w-1 -translate-x-1/2 rounded-full bg-border md:block" /> */}
 
           <div className="space-y-5 md:space-y-2">
             {sortedExperience.map((item, index) => {
