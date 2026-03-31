@@ -109,15 +109,15 @@ export default function About({
         <div className="w-full max-w-5xl px-4">
           <Education education={education} />
         </div>
-
-
       </StickySection>
+
+      <div ref={expRef} className="h-[250vh] relative">
       <StickySection className="bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] ">
         <SectionHeader title="Achievements" accent="" />
         <div className="w-full max-w-5xl px-4">
-          <Achievements achievements={achievements} />{" "}
+          <Achievements achievements={achievements} scrollYProgress={achieveScroll}  />
         </div>
-      </StickySection>
+      </StickySection></div>
 
       {/* 5. ACHIEVEMENTS & CERTIFICATES */}
       <StickySection  className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
