@@ -1,10 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Reveal from "@/components/animation/Reveal";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-
-import Tabs from "./Tabs";
+import { motion } from "framer-motion";
 
 import Skills from "./Skills";
 import Experience from "./Experience";
@@ -33,103 +31,97 @@ export default function About({
   achievements: AchievementProps[];
   certificates: CertificateProps[];
 }) {
-  const [visable, setVisable] = useState("skills");
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "start start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [0.82, 1]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [120, 0]);
-
   return (
-    <motion.section
-      ref={sectionRef}
-      style={{ scale, rotate, y }}
-      id="about"
-      className="font-sans bg-bg px-6 py-20 text-text md:px-12 lg:px-24 overflow-hidden"
-    >
-      <div className="max-w-6xl mx-auto">
+    // The outer container handles the ID for the Header observer
+    <div id="about" className="relative">
+      
+      {/* 1. INTRO SECTION */}
+      <StickySection className="bg-bg border-t border-white/5">
         <Reveal>
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
               About <span className="text-accent">Me</span>
             </h2>
-            <div className="mx-auto h-1 w-20 rounded-full bg-accent"></div>
+            <div className="mx-auto h-1.5 w-20 rounded-full bg-accent"></div>
           </div>
         </Reveal>
+        <Reveal delay={0.2}>
+          <div className="max-w-3xl space-y-6 text-center text-lg leading-relaxed text-text-muted">
+            <p>
+              I&apos;m an <span className="font-semibold text-text">AI Engineer</span> focused on building intelligent systems powered by
+              <span className="text-accent"> LLMs</span>, RAG, and modern AI pipelines.
+            </p>
+            <p>
+              Alongside engineering, I serve as an
+              <span className="text-accent"> AI Instructor at Digital Knights</span>, mentoring students in ML and AI development.
+            </p>
+            <p className="hidden md:block text-sm uppercase tracking-widest text-accent/50 pt-10">
+              Scroll to explore my journey ↓
+            </p>
+          </div>
+        </Reveal>
+      </StickySection>
 
-        <div className="flex flex-col items-center justify-center space-y-12">
-          <Reveal delay={0.2}>
-            <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted">
-              <p>
-                I&apos;m an{" "}
-                <span className="font-semibold text-text">AI Engineer</span>{" "}
-                focused on building intelligent systems powered by
-                <span className="text-accent">
-                  {" "}
-                  Large Language Models (LLMs)
-                </span>
-                , Retrieval-Augmented Generation (RAG), and modern AI pipelines.
-              </p>
-
-              <p>
-                My work revolves around designing scalable AI architectures,
-                integrating vector databases, and deploying real-world
-                applications that transform data into actionable intelligence.
-              </p>
-
-              <p>
-                Alongside engineering, I serve as an
-                <span className="text-accent">
-                  {" "}
-                  AI Instructor at Digital Knights
-                </span>
-                , mentoring students and guiding them through hands-on machine
-                learning and AI system development.
-              </p>
-
-              <p>
-                I believe in bridging the gap between research and production -
-                turning complex AI concepts into reliable, scalable solutions.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.3}>
-            <div className="flex max-w-screen flex-col items-center justify-between space-y-12 lg:justify-start">
-              <Tabs visable={visable} setVisable={setVisable} />
-              <div className="w-full px-4 md:px-28">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={visable}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    {visable === "skills" && <Skills skills={skills} />}
-                    {visable === "experience" && (
-                      <Experience experience={experience} />
-                    )}
-                    {visable === "education" && (
-                      <Education education={education} />
-                    )}
-                    {visable === "achievements" && (
-                      <Achievements achievements={achievements} />
-                    )}
-                    {visable === "certificates" && (
-                      <Certifications certificates={certificates} />
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
-          </Reveal>
+      {/* 2. SKILLS SECTION */}
+      <StickySection className="bg-neutral-900 shadow-[0_-50px_50px_rgba(0,0,0,0.5)]">
+        <SectionHeader title="Technical" accent="Skills" />
+        <div className="w-full max-w-5xl px-4 overflow-y-auto max-h-[70vh]">
+           <Skills skills={skills} />
         </div>
+      </StickySection>
+
+      {/* 3. EXPERIENCE SECTION */}
+      <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.5)]">
+        <SectionHeader title="Professional" accent="Experience" />
+        <div className="w-full max-w-5xl px-4 overflow-y-auto max-h-[70vh]">
+          <Experience experience={experience} />
+        </div>
+      </StickySection>
+
+      {/* 4. EDUCATION SECTION */}
+      <StickySection className="bg-neutral-900 shadow-[0_-50px_50px_rgba(0,0,0,0.5)]">
+        <SectionHeader title="Academic" accent="Background" />
+        <div className="w-full max-w-5xl px-4">
+          <Education education={education} />
+        </div>
+      </StickySection>
+
+      {/* 5. ACHIEVEMENTS & CERTIFICATES */}
+      <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.5)]">
+        <SectionHeader title="Awards &" accent="Certifications" />
+        <div className="w-full max-w-5xl px-4 grid md:grid-cols-2 gap-8 overflow-y-auto max-h-[70vh]">
+          <Achievements achievements={achievements} />
+          <Certifications certificates={certificates} />
+        </div>
+      </StickySection>
+    </div>
+  );
+}
+
+// --- HELPER COMPONENTS FOR CLEANER CODE ---
+
+function StickySection({ children, className }: { children: React.ReactNode, className?: string }) {
+  return (
+    <section className={`sticky top-0 h-screen w-full flex flex-col items-center justify-center p-6 md:p-12 lg:p-24 overflow-hidden ${className}`}>
+      {/* Background Pattern Mask */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      
+      <div className="relative z-10 w-full flex flex-col items-center">
+        {children}
       </div>
-    </motion.section>
+    </section>
+  );
+}
+
+function SectionHeader({ title, accent }: { title: string, accent: string }) {
+  return (
+    <Reveal>
+      <div className="mb-10 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold">
+          {title} <span className="text-accent">{accent}</span>
+        </h2>
+        <div className="mx-auto mt-2 h-1 w-12 rounded-full bg-accent/50" />
+      </div>
+    </Reveal>
   );
 }
