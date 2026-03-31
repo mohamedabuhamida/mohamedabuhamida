@@ -114,7 +114,7 @@ export default function About({
         </div>
       </StickySection>
 
-      <div ref={expRef} className="h-[250vh] relative">
+      <div ref={achieveRef} className="h-[250vh] relative">
         <StickySection className="bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] ">
           <SectionHeader title="Achievements" accent="" />
           <div className="w-full max-w-5xl px-4">
