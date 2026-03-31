@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
 import Reveal from "@/components/animation/Reveal";
 import { motion } from "framer-motion";
-
-import Tabs, { aboutTabs } from "./Tabs";
 
 import Skills from "./Skills";
 import Experience from "./Experience";
@@ -31,39 +31,57 @@ export default function About({
   achievements: AchievementProps[];
   certificates: CertificateProps[];
 }) {
-  const [visable, setVisable] = useState("skills");
+  const [activeSection, setActiveSection] = useState("skills");
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   const sections = useMemo(
     () => [
       {
         key: "skills",
-        title: "Skills",
+        eyebrow: "Core Stack",
+        title: "Skills That Power The Build",
+        blurb:
+          "The tools and technologies I rely on to turn AI ideas into production-ready systems.",
         content: <Skills skills={skills} />,
       },
       {
         key: "experience",
-        title: "Experience",
+        eyebrow: "Career Path",
+        title: "Experience Shaped By Real Systems",
+        blurb:
+          "Hands-on roles focused on applied AI, scalable pipelines, and practical delivery.",
         content: <Experience experience={experience} />,
       },
       {
         key: "education",
-        title: "Education",
+        eyebrow: "Foundation",
+        title: "Education Behind The Engineering",
+        blurb:
+          "Academic work that strengthened the theory behind the production mindset.",
         content: <Education education={education} />,
       },
       {
         key: "achievements",
-        title: "Achievements",
+        eyebrow: "Highlights",
+        title: "Milestones Worth Calling Out",
+        blurb:
+          "Selected wins, recognition, and moments that reflect impact beyond the day-to-day.",
         content: <Achievements achievements={achievements} />,
       },
       {
         key: "certificates",
-        title: "Certificates",
+        eyebrow: "Validation",
+        title: "Certifications And Continued Growth",
+        blurb:
+          "Proof of ongoing learning across modern tooling, systems thinking, and AI practice.",
         content: <Certifications certificates={certificates} />,
       },
     ],
     [skills, experience, education, achievements, certificates]
   );
+
+  const activeSectionData =
+    sections.find((section) => section.key === activeSection) ?? sections[0];
 
   useEffect(() => {
     const nodes = Object.values(sectionRefs.current).filter(
@@ -80,13 +98,12 @@ export default function About({
 
         if (!visibleEntries.length) return;
 
-        const activeKey = visibleEntries[0].target.getAttribute("data-about-key");
-        if (activeKey) {
-          setVisable(activeKey);
-        }
+        const currentKey =
+          visibleEntries[0].target.getAttribute("data-about-key") ?? sections[0].key;
+        setActiveSection(currentKey);
       },
       {
-        threshold: [0.25, 0.45, 0.65],
+        threshold: [0.2, 0.4, 0.6],
         rootMargin: "-18% 0px -18% 0px",
       }
     );
@@ -96,14 +113,6 @@ export default function About({
     return () => observer.disconnect();
   }, [sections]);
 
-  const handleTabChange = (key: string) => {
-    setVisable(key);
-    sectionRefs.current[key]?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
   return (
     <section
       id="about"
@@ -111,7 +120,7 @@ export default function About({
     >
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <div className="mx-auto mb-12 max-w-4xl text-center">
+          <div className="mx-auto mb-16 max-w-4xl text-center">
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               About <span className="text-accent">Me</span>
             </h2>
@@ -119,61 +128,72 @@ export default function About({
           </div>
         </Reveal>
 
-        <div className="mx-auto mb-16 max-w-4xl">
-          <Reveal delay={0.2}>
-            <div className="space-y-6 text-center leading-relaxed text-text-muted">
-              <p>
-                I'm an <span className="font-semibold text-text">AI Engineer</span>{" "}
-                focused on building intelligent systems powered by
-                <span className="text-accent">
-                  {" "}
-                  Large Language Models (LLMs)
-                </span>
-                , Retrieval-Augmented Generation (RAG), and modern AI pipelines.
-              </p>
+        <div className="grid gap-12 lg:grid-cols-[minmax(280px,360px)_minmax(0,1fr)] lg:gap-16">
+          <div className="lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)]">
+            <Reveal delay={0.15}>
+              <div className="flex h-full flex-col justify-between rounded-[32px] border border-border/70 bg-linear-to-br from-background/80 via-background/65 to-primary/10 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+                <div className="space-y-8">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent/80">
+                      {activeSectionData.eyebrow}
+                    </p>
+                    <h3 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">
+                      {activeSectionData.title}
+                    </h3>
+                    <p className="mt-4 leading-7 text-muted-foreground">
+                      {activeSectionData.blurb}
+                    </p>
+                  </div>
 
-              <p>
-                My work revolves around designing scalable AI architectures,
-                integrating vector databases, and deploying real-world
-                applications that transform data into actionable intelligence.
-              </p>
+                  <div className="space-y-5 text-sm leading-7 text-text-muted">
+                    <p>
+                      I'm an <span className="font-semibold text-text">AI Engineer</span>{" "}
+                      focused on building intelligent systems powered by
+                      <span className="text-accent">
+                        {" "}
+                        Large Language Models (LLMs)
+                      </span>
+                      , Retrieval-Augmented Generation (RAG), and modern AI
+                      pipelines.
+                    </p>
 
-              <p>
-                Alongside engineering, I serve as an
-                <span className="text-accent"> AI Instructor at Digital Knights</span>,
-                mentoring students and guiding them through hands-on machine
-                learning and AI system development.
-              </p>
+                    <p>
+                      My work centers on turning complex ideas into practical
+                      software, from vector search and orchestration to
+                      production-ready AI experiences.
+                    </p>
 
-              <p>
-                I believe in bridging the gap between research and production -
-                turning complex AI concepts into reliable, scalable solutions.
-              </p>
-            </div>
-          </Reveal>
-        </div>
+                    <p>
+                      Alongside engineering, I teach AI in hands-on settings and
+                      enjoy helping people move from theory into real-world
+                      implementation.
+                    </p>
+                  </div>
+                </div>
 
-        <div className="grid gap-10 lg:grid-cols-[88px_minmax(0,1fr)] lg:items-start">
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <div className="flex justify-center lg:block">
-              <Tabs visable={visable} setVisable={handleTabChange} />
-            </div>
-
-            <div className="mt-6 hidden lg:flex lg:flex-col lg:gap-3">
-              {aboutTabs.map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => handleTabChange(tab.key)}
-                  className={`text-left text-xs uppercase tracking-[0.28em] transition-colors ${
-                    visable === tab.key
-                      ? "text-accent"
-                      : "text-muted-foreground hover:text-text"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+                <div className="mt-10 space-y-3 border-t border-border/60 pt-6">
+                  {sections.map((section, index) => (
+                    <div
+                      key={section.key}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <span
+                        className={
+                          activeSection === section.key
+                            ? "font-semibold text-accent"
+                            : "text-muted-foreground"
+                        }
+                      >
+                        {section.eyebrow}
+                      </span>
+                      <span className="text-xs uppercase tracking-[0.24em] text-muted-foreground/70">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
           </div>
 
           <div className="space-y-12">
@@ -184,20 +204,28 @@ export default function About({
                   sectionRefs.current[section.key] = node;
                 }}
                 data-about-key={section.key}
-                initial={{ opacity: 0, y: 32 }}
+                initial={{ opacity: 0, y: 36 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.45, delay: index * 0.04 }}
-                className="flex min-h-screen scroll-mt-28 items-center rounded-[32px] border border-border/70 bg-background/40 px-4 py-10 backdrop-blur-sm md:px-8"
+                viewport={{ once: true, amount: 0.22 }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                className="flex min-h-screen items-center rounded-[32px] border border-border/70 bg-background/35 px-4 py-10 backdrop-blur-sm md:px-8"
               >
                 <div className="w-full">
-                  <div className="mb-8 flex items-center justify-between gap-4 border-b border-border/60 pb-4">
-                    <h3 className="text-2xl font-semibold text-text md:text-3xl">
-                      {section.title}
-                    </h3>
-                    <span className="text-xs uppercase tracking-[0.32em] text-muted-foreground">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+                  <div className="mb-8 border-b border-border/60 pb-5">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent/80">
+                          {section.eyebrow}
+                        </p>
+                        <h3 className="mt-3 text-2xl font-semibold text-text md:text-3xl">
+                          {section.title}
+                        </h3>
+                      </div>
+
+                      <span className="text-xs uppercase tracking-[0.32em] text-muted-foreground">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
                   </div>
 
                   {section.content}
