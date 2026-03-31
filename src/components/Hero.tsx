@@ -26,9 +26,7 @@ export default function Hero({
         style={{ scale: heroScale, rotate: heroRotate }}
         className="sticky top-0 flex h-screen items-center justify-center overflow-hidden"
       >
-        {/* <div className="absolute inset-0 bg-linear-to-tr from-bg to-primary" /> */}
        
-        {/* <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-bg via-bg/60 to-transparent" /> */}
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 md:px-12 md:py-24 lg:px-24 lg:py-28">
           <div className="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-2 lg:gap-16">
