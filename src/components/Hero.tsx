@@ -1,21 +1,19 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { MotionValue, motion, useTransform } from "framer-motion";
 import TextType from "@/components/animation/TextType";
 import Reveal from "@/components/animation/Reveal";
 
 import { HeroProps } from "@/types";
 
-export default function Hero({ data }: HeroProps) {
-  const containerRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
+export default function Hero({
+  data,
+  scrollYProgress,
+}: HeroProps & {
+  scrollYProgress: MotionValue<number>;
+}) {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
   const heroRotate = useTransform(scrollYProgress, [0, 1], [0, -4]);
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
@@ -24,11 +22,7 @@ export default function Hero({ data }: HeroProps) {
   const gridOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [0.22, 0.12, 0.05]);
 
   return (
-    <section
-      ref={containerRef}
-      id="home"
-      className="relative h-[180vh] bg-linear-to-tr from-bg to-primary"
-    >
+    <section id="home" className="relative h-screen bg-linear-to-tr from-bg to-primary">
       <motion.div
         style={{ scale: heroScale, rotate: heroRotate, y: heroY }}
         className="sticky top-0 flex h-screen items-center justify-center overflow-hidden"
