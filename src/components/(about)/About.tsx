@@ -106,19 +106,20 @@ export default function About({
           <Education education={education} />
         </div>
       </StickySection>
-
-      {/* 5. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
-      <section id="achievements" className="relative bg-black">
-        <Achievements achievements={achievements} />
-      </section>
-
-      {/* 6. CERTIFICATIONS SECTION */}
+      
+      {/* 5. CERTIFICATIONS SECTION */}
       <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
         </div>
       </StickySection>
+
+      {/* 6. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
+      <section id="achievements" className="relative bg-black">
+        <Achievements achievements={achievements} />
+      </section>
+
     </div>
   );
 }
