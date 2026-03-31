@@ -55,9 +55,18 @@ export default function About({
             <p>
               I&apos;m an{" "}
               <span className="font-semibold text-text">AI Engineer</span>{" "}
-              focused on building intelligent systems powered by
-              <span className="text-accent"> LLMs</span>, RAG, and AI pipelines.
+              specializing in building intelligent, production-ready systems
+              using
+              <span className="text-accent"> LLMs</span>, RAG architectures, and
+              scalable AI pipelines.
             </p>
+
+            <p>
+              Passionate about transforming data into actionable insights and
+              deploying real-world AI solutions across computer vision, NLP, and
+              automation systems.
+            </p>
+
             <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
               Scroll to explore my journey ↓
             </p>
