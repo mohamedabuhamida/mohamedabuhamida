@@ -38,16 +38,15 @@ export default function About({
     offset: ["start start", "end end"],
   });
 
-  // // 2. UNIQUE REF for Achievements
-  // const achieveRef = useRef<HTMLDivElement>(null);
-  // const { scrollYProgress: achieveScroll } = useScroll({
-  //   target: achieveRef,
-  //   offset: ["start start", "end end"],
-  // });
+  // 2. UNIQUE REF for Achievements
+  const achieveRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: achieveScroll } = useScroll({
+    target: achieveRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
     <div id="about" className="relative bg-black">
-      
       {/* 1. INTRO SECTION */}
       <StickySection className="bg-bg border-t border-white/5">
         <Reveal>
@@ -61,7 +60,9 @@ export default function About({
         <Reveal delay={0.2}>
           <div className="max-w-4xl space-y-6 text-center leading-relaxed text-text-muted text-lg">
             <p>
-              I&apos;m an <span className="font-semibold text-text">AI Engineer</span> focused on building intelligent systems powered by
+              I&apos;m an{" "}
+              <span className="font-semibold text-text">AI Engineer</span>{" "}
+              focused on building intelligent systems powered by
               <span className="text-accent"> LLMs</span>, RAG, and AI pipelines.
             </p>
             <p className="hidden md:block text-sm uppercase tracking-[0.3em] text-accent/40 pt-10 animate-pulse">
@@ -99,11 +100,11 @@ export default function About({
 
       {/* 5. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
       <section id="achievements" className="relative bg-black">
-  {/* Add a shadow here to transition from the previous section */}
-  <div className="absolute top-0 w-full h-24 bg-linear-to-b from-black/50 to-transparent z-20 pointer-events-none" />
-  
-  <Achievements achievements={achievements} />
-</section>
+        {/* Add a shadow here to transition from the previous section */}
+        <div className="absolute top-0 w-full h-24 bg-linear-to-b from-black/50 to-transparent z-20 pointer-events-none" />
+
+        <Achievements achievements={achievements} />
+      </section>
 
       {/* 6. CERTIFICATIONS SECTION */}
       <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
