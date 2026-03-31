@@ -2,7 +2,7 @@
 
 import { motion, useAnimationControls } from "framer-motion";
 import { SkillProps } from "@/types";
-import { useRef, useEffect, useState } from "react";
+import { useEffect } from "react";
 import SkillCard from "./SkillCard";
 
 export default function Skills({ skills }: { skills: SkillProps[] }) {
@@ -19,12 +19,15 @@ export default function Skills({ skills }: { skills: SkillProps[] }) {
         ease: "linear",
       },
     });
-  }, []);
+  }, [controls]);
 
   return (
-    <div className="w-full space-y-8 lg:max-w-4xl">
+    // Added mx-auto and flex items-center to center the whole block
+    <div className="w-full space-y-12 lg:max-w-5xl mx-auto flex flex-col items-center">
+      
       {/* 🔹 Fixed Grid (4 Rows Default) */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 items-center w-full">
+      {/* Added justify-items-center to keep cards centered in their columns */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 items-center w-full justify-items-center">
         {fixedSkills.map((skill, index) => (
           <SkillCard key={skill.name} skill={skill} index={index} />
         ))}
@@ -33,7 +36,7 @@ export default function Skills({ skills }: { skills: SkillProps[] }) {
       {/* 🔹 Moving Strip */}
       {movingSkills.length > 0 && (
         <div
-          className="relative overflow-hidden"
+          className="relative overflow-hidden w-full max-w-4xl"
           onMouseEnter={() => controls.stop()}
           onMouseLeave={() =>
             controls.start({
@@ -46,20 +49,22 @@ export default function Skills({ skills }: { skills: SkillProps[] }) {
             })
           }
         >
-          <motion.div className="flex gap-4 w-max" animate={controls}>
+          <motion.div className="flex gap-6 w-max py-4" animate={controls}>
             {[...movingSkills, ...movingSkills].map((skill, index) => (
               <div
                 key={index}
-                className="bg-primary/10 border border-border rounded-xl px-5 py-3 whitespace-nowrap"
+                className="bg-primary/5 border border-white/5 hover:border-accent/30 transition-colors rounded-2xl px-6 py-4 whitespace-nowrap"
               >
-                <span className="font-semibold text-text">{skill.name}</span>
+                <span className="font-bold text-text/80 tracking-wide">
+                  {skill.name}
+                </span>
               </div>
             ))}
           </motion.div>
 
-          {/* Fade edges effect */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-linear-to-r from-bg via-bg/80 to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-16 bg-linear-to-l from-bg via-bg/80 to-transparent pointer-events-none" />
+          {/* Fade edges effect - Adjusted to match the dark bg */}
+          <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-bg via-bg/40 to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-bg via-bg/40 to-transparent pointer-events-none z-10" />
         </div>
       )}
     </div>
