@@ -133,24 +133,26 @@ function HeroAboutTransition({
   certificates: CertificateProps[];
 }) {
   const containerRef = useRef<HTMLElement | null>(null);
-
-  // Hook into the scroll progress of the 200vh container
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Hero Animations: Shrink from 1 to 0.8 and rotate slightly
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   const heroRotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
-
-  // About Animations: Grow from 0.8 to 1 and straighten up
   const aboutScale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const aboutRotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
 
   return (
     <main ref={containerRef} className="relative h-[200vh] bg-black">
-      {/* SECTION 1: HERO (Sticky) */}
+      {/* --- ANCHORS FOR HEADER OBSERVER --- */}
+      {/* Home anchor at the very top */}
+      <div id="home" className="absolute top-0 left-0 h-px w-px" />
+      
+      {/* About anchor at the 100vh mark (start of second section) */}
+      <div id="about" className="absolute top-[100vh] left-0 h-px w-px" />
+      {/* ---------------------------------- */}
+
       <motion.section
         style={{ scale: heroScale, rotate: heroRotate }}
         className="sticky top-0 h-screen overflow-hidden z-0"
@@ -158,10 +160,9 @@ function HeroAboutTransition({
         <Hero data={data} scrollYProgress={scrollYProgress} />
       </motion.section>
 
-      {/* SECTION 2: ABOUT (Relative - scrolls over/after Hero) */}
       <motion.section
         style={{ scale: aboutScale, rotate: aboutRotate }}
-        className="relative min-h-screen z-10 bg-bg" // bg-bg ensures it hides the hero behind it
+        className="relative min-h-screen z-10 bg-bg shadow-[0_-50px_100px_rgba(0,0,0,0.5)]"
       >
         <About
           skills={skills}
