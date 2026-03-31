@@ -132,37 +132,40 @@ function HeroAboutTransition({
   achievements: AchievementProps[];
   certificates: CertificateProps[];
 }) {
-  const containerRef = useRef<HTMLElement | null>(null);
+  const aboutRef = useRef<HTMLElement | null>(null);
+  
+  // Track scroll specifically when the About section is moving 
+  // from the bottom of the screen to the top of the screen.
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
+    target: aboutRef,
+    offset: ["start end", "start start"],
   });
 
+  // Hero animations (shrinks as About comes up)
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   const heroRotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
+  
+  // About animations (scales up as it arrives)
   const aboutScale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const aboutRotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
 
   return (
-    <main ref={containerRef} className="relative h-[200vh] bg-black">
-      {/* --- ANCHORS FOR HEADER OBSERVER --- */}
-      {/* Home anchor at the very top */}
-      <div id="home" className="absolute top-0 left-0 h-px w-px" />
-      
-      {/* About anchor at the 100vh mark (start of second section) */}
-      <div id="about" className="absolute top-[100vh] left-0 h-px w-px" />
-      {/* ---------------------------------- */}
-
+    <main className="relative bg-black">
+      {/* 1. HERO SECTION: Sticky so it stays put while About scrolls over it */}
       <motion.section
         style={{ scale: heroScale, rotate: heroRotate }}
         className="sticky top-0 h-screen overflow-hidden z-0"
       >
+        <div id="home" className="absolute top-0 left-0 h-px w-px" />
         <Hero data={data} scrollYProgress={scrollYProgress} />
       </motion.section>
 
+      {/* 2. ABOUT SECTION: Relative so it pushes the rest of the page down naturally */}
       <motion.section
+        ref={aboutRef}
+        id="about" // This ID is used by your Header observer
         style={{ scale: aboutScale, rotate: aboutRotate }}
-        className="relative min-h-screen z-10 bg-bg shadow-[0_-50px_100px_rgba(0,0,0,0.5)]"
+        className="relative z-10 bg-bg shadow-[0_-50px_100px_rgba(0,0,0,0.5)] origin-top"
       >
         <About
           skills={skills}
