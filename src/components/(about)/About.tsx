@@ -38,13 +38,6 @@ export default function About({
     offset: ["start start", "end end"],
   });
 
-  // 2. UNIQUE REF for Achievements
-  const achieveRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: achieveScroll } = useScroll({
-    target: achieveRef,
-    offset: ["start start", "end end"],
-  });
-
   return (
     <div id="about" className="relative bg-black">
       {/* 1. INTRO SECTION */}
