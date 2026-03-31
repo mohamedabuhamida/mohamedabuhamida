@@ -98,16 +98,12 @@ export default function About({
       </StickySection>
 
       {/* 5. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
-      <div ref={achieveRef} className="h-[250vh] relative">
-        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-black shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-hidden">
-          <div className="w-full h-full max-w-6xl px-4 flex items-center justify-center">
-            <Achievements
-              achievements={achievements}
-              // scrollYProgress={achieveScroll}
-            />
-          </div>
-        </div>
-      </div>
+      <section id="achievements" className="relative bg-black">
+  {/* Add a shadow here to transition from the previous section */}
+  <div className="absolute top-0 w-full h-24 bg-linear-to-b from-black/50 to-transparent z-20 pointer-events-none" />
+  
+  <Achievements achievements={achievements} />
+</section>
 
       {/* 6. CERTIFICATIONS SECTION */}
       <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
