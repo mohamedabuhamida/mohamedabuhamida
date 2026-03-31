@@ -12,84 +12,73 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Sticky header
+  // Navigation configuration - IDs must match the id="..." in your sections
+  const navigationItems = [
+    { label: "Home", href: "/#home", id: "home" },
+    { label: "About", href: "/#about", id: "about" },
+    { label: "Projects", href: "/#projects", id: "projects" },
+    { label: "Contact", href: "/#contact", id: "contact" },
+  ];
+
+  // 1. Sticky header effect
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock scroll when mobile menu is open
+  // 2. Lock scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
   }, [isMobileMenuOpen]);
 
-  // Close menu on ESC
+  // 3. Active section observer
   useEffect(() => {
-    const handleKeyDown = (e: any) => {
-      if (e.key === "Escape") setIsMobileMenuOpen(false);
+    const observerOptions = {
+      // This margin creates a horizontal "strip" in the middle of the screen.
+      // When a section's boundary crosses this strip, it becomes active.
+      rootMargin: "-30% 0px -60% 0px",
+      threshold: 0,
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
-  // Active section observer
-  useEffect(() => {
-    const sections = ["home", "about", "projects", "contact"];
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // When a section enters the "middle" 40% of the screen
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        // Adjust rootMargin to trigger the change earlier or later
-        // This setting triggers when the section reaches 40% from the top
-        rootMargin: "-20% 0px -70% 0px", 
-        threshold: 0,
-      },
-    );
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
+    // Observe all sections defined in navigation
+    navigationItems.forEach((item) => {
+      const el = document.getElementById(item.id);
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
   }, []);
 
-  const navigationItems = [
-    { label: "Home", href: "/#home" },
-    { label: "About", href: "/#about" },
-    { label: "Projects", href: "/#projects" },
-    { label: "Contact", href: "/#contact" },
-  ];
-
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out
         ${
           isSticky
-            ? "backdrop-blur-md bg-primary/10 shadow-lg max-w-7xl mx-auto rounded-full top-4"
-            : "bg-transparent"
+            ? "max-w-3xl mx-auto top-4" // Floating pill style when sticky
+            : "max-w-7xl mx-auto top-0"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-24">
-          <div
-            className={`flex items-center justify-between transition-all duration-300
-            ${isSticky ? "h-16" : "h-20"}`}
-          >
+        <div 
+          className={`transition-all duration-500 px-6 sm:px-10 
+          ${isSticky 
+            ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2" 
+            : "bg-transparent py-6"}`}
+        >
+          <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
               <Image
@@ -98,45 +87,30 @@ export default function Header() {
                 width={40}
                 height={40}
                 priority
-                className={`transition-all duration-300
-                ${isSticky ? "w-8 h-8" : "w-10 h-10"}`}
+                className={`transition-all duration-300 ${isSticky ? "w-7 h-7" : "w-10 h-10"}`}
               />
             </Link>
 
-            {/* Desktop Nav (NOT Floating anymore) */}
-            <nav className="hidden md:flex items-center gap-2 relative">
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-1">
               {navigationItems.map((item) => {
-                const sectionId =
-                  item.href === "/"
-                    ? "home"
-                    : item.href.replace("/#", "").replace("/", "");
-
-                const isActive = activeSection === sectionId;
-
+                const isActive = activeSection === item.id;
                 return (
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="relative px-5 py-2 text-sm font-medium"
+                    className="relative px-4 py-2 text-sm font-medium transition-colors"
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-indicator"
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 30,
-                          mass: 0.6,
-                        }}
                         className="absolute inset-0 rounded-full bg-accent/20"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
-
-                    <span
-                      className={`relative z-10 transition-colors duration-300 ${
-                        isActive ? "text-accent" : "text-text"
-                      }`}
-                    >
+                    <span className={`relative z-10 transition-colors duration-300 ${
+                      isActive ? "text-accent" : "text-text/70 hover:text-text"
+                    }`}>
                       {item.label}
                     </span>
                   </Link>
@@ -146,49 +120,19 @@ export default function Header() {
 
             {/* Actions */}
             <div className="flex items-center gap-4">
-              <Link
-                href="https://linkedin.com/in/mohamedabuhamida"
-                target="_blank"
-                className="hidden md:block text-text hover:text-accent transition"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="text-xl" />
-              </Link>
-              <Link
-                href="https://github.com/mohamedabuhamida"
-                target="_blank"
-                className="hidden md:block text-text hover:text-accent transition"
-                aria-label="GitHub"
-              >
-                <Github className="text-xl" />
-              </Link>
-              <Link
-                href="https://www.upwork.com/freelancers/~0191d02b8deff4294c"
-                target="_blank"
-                className="hidden md:block text-text hover:text-accent transition"
-                aria-label="Upwork"
-              >
-                <FaUpwork className="text-xl" />
-              </Link>
+              <div className="hidden lg:flex items-center gap-3">
+                <SocialLink href="https://linkedin.com/in/mohamedabuhamida" icon={<Linkedin size={18} />} />
+                <SocialLink href="https://github.com/mohamedabuhamida" icon={<Github size={18} />} />
+                <SocialLink href="https://www.upwork.com/freelancers/~0191d02b8deff4294c" icon={<FaUpwork size={18} />} />
+              </div>
 
-              {/* Mobile Menu Button */}
+              {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="md:hidden p-2 rounded-lg hover:bg-white/10 transition"
-                aria-label="Open menu"
+                className="md:hidden p-2 text-text hover:text-accent transition"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
@@ -196,48 +140,41 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu — unchanged */}
-      <div
-        className={`fixed inset-0 z-50 md:hidden transition-all duration-300
-        ${isMobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"}`}
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 z-[100] md:hidden transition-all duration-500 
+        ${isMobileMenuOpen ? "visible" : "invisible"}`}
       >
-        <div
-          className="absolute inset-0 bg-black/60"
+        <div 
+          className={`absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-500
+          ${isMobileMenuOpen ? "opacity-100" : "opacity-0"}`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
-
-        <div
-          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-linear-to-br from-primary to-bg
-          transition-transform duration-300
+        <div className={`absolute right-0 top-0 h-full w-[280px] bg-primary border-l border-white/10 p-8 transition-transform duration-500 ease-out
           ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
-          <div className="p-6 flex flex-col gap-6">
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="self-end p-2"
-            >
-              ✕
-            </button>
-
+          <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 text-2xl">✕</button>
+          <div className="flex flex-col gap-8 mt-12">
             {navigationItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-medium hover:text-accent transition"
+                className={`text-xl font-semibold ${activeSection === item.id ? "text-accent" : "text-text"}`}
               >
                 {item.label}
               </Link>
             ))}
-
-            <div className="pt-6 border-t border-white/10 flex gap-4">
-              <Linkedin />
-              <Github />
-              <FaUpwork />
-            </div>
           </div>
         </div>
       </div>
     </>
+  );
+}
+
+function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
+  return (
+    <Link href={href} target="_blank" className="text-text/60 hover:text-accent transition-colors">
+      {icon}
+    </Link>
   );
 }
