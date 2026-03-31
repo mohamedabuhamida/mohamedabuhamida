@@ -15,7 +15,7 @@ export default function Experience({
 
   return (
     <div className="w-full">
-      <div className="mx-auto max-w-5xl  p-6 md:p-10">
+      <div className="mx-auto max-w-5xl p-6 md:p-10">
         <div className="mb-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent/80">
             Career Path
@@ -26,7 +26,7 @@ export default function Experience({
         </div>
 
         <div className="relative mx-auto max-w-4xl py-4">
-          <div className="absolute left-1/2 top-0 hidden h-full w-1 -translate-x-1/2 rounded-full bg-border md:block bg-white" />
+          <div className="absolute left-1/2 top-0 hidden h-full w-[3px] -translate-x-1/2 rounded-full bg-[#173F78] md:block" />
 
           <div className="space-y-5 md:space-y-2">
             {sortedExperience.map((item, index) => {
@@ -53,13 +53,13 @@ export default function Experience({
 
                   <div className="absolute left-0 top-6 flex items-center md:static md:col-start-2 md:justify-center">
                     <div
-                      className={`relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-4 border-bg shadow-sm ${
+                      className={`relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#0B1220] shadow-[0_0_0_6px_#0B1220] ${
                         isCurrent
                           ? "bg-accent text-background"
-                          : "bg-card text-foreground"
+                          : "bg-[#132949] text-white"
                       }`}
                     >
-                      <HiCheck className="text-sm" />
+                      <HiCheck className={`${isCurrent ? "text-sm" : "text-xs"} opacity-95`} />
                     </div>
                   </div>
 
@@ -87,10 +87,10 @@ function TimelineCard({
 }) {
   return (
     <div
-      className={`ml-12 max-w-md rounded-2xl border px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.12)] transition-all duration-300 md:ml-0 ${
+      className={`ml-12 max-w-md rounded-2xl border px-5 py-4 transition-all duration-300 md:ml-0 ${
         isCurrent
-          ? "border-accent/40 bg-accent/12"
-          : "border-border bg-card/80"
+          ? "border-accent/35 bg-[#111D30]"
+          : "border-[#1B2638] bg-[#0F1726]"
       }`}
     >
       <div className="space-y-1">
@@ -105,7 +105,7 @@ function TimelineCard({
       </div>
 
       {(item.start_date || item.end_date || item.is_current) && (
-        <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+        <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
           {formatDateRange(item.start_date, item.end_date, item.is_current)}
         </p>
       )}
