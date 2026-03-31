@@ -92,12 +92,11 @@ export default function About({
       </StickySection>
 
       {/* 5. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
-      <section id="achievements" className="relative bg-bg">
+      <section id="achievements" className="relative bg-black">
         {/* Add a shadow here to transition from the previous section */}
         <div className="absolute top-0 w-full h-24 bg-linear-to-b from-black/50 to-transparent z-20 pointer-events-none" />
-        <div className="w-full max-w-5xl px-4">
+
         <Achievements achievements={achievements} />
-        </div>
       </section>
 
       {/* 6. CERTIFICATIONS SECTION */}
