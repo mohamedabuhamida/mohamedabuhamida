@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, useTransform, MotionValue } from "framer-motion";
+import { motion, MotionValue } from "framer-motion";
 import { HiCheck } from "react-icons/hi2";
 import { ExperienceProps } from "@/types";
-import { useRef } from "react";
 
 export default function Experience({
   experience,
@@ -15,10 +14,6 @@ export default function Experience({
   const sortedExperience = [...experience].sort(
     (a, b) => (b.order_index ?? 0) - (a.order_index ?? 0)
   );
-
-  // This moves the entire list upwards as the user scrolls the section
-  // -50% means it will slide up halfway through its total height
-  const yTranslate = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
 
   return (
     <div className="w-full h-full flex flex-col items-center">
@@ -32,12 +27,9 @@ export default function Experience({
       </div>
 
       {/* The visible viewport */}
-      <div className="relative w-full max-w-4xl h-[60vh] overflow-hidden">
+      <div className="relative w-full max-w-4xl h-auto lg:h-[60vh] overflow-visible lg:overflow-hidden">
         {/* The moving content */}
-        <motion.div 
-          style={{ y: yTranslate }} 
-          className="relative px-6 py-10"
-        >
+        <motion.div className="relative px-2 py-6 md:px-6 md:py-10">
           {/* The Vertical Line */}
           <div className="absolute left-6 md:left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-gradient-to-b from-accent/50 via-accent/20 to-transparent" />
 
@@ -65,7 +57,7 @@ export default function Experience({
 function ExperienceItem({ item, isLeft, isCurrent }: { item: any, isLeft: boolean, isCurrent: boolean }) {
   return (
     <motion.article
-      className="relative md:grid md:grid-cols-[1fr_64px_1fr] md:items-center"
+      className="relative pl-10 md:pl-0 md:grid md:grid-cols-[1fr_64px_1fr] md:items-center"
     >
       <div className={`${isLeft ? "md:col-start-1 md:text-right md:pr-8" : "md:col-start-3 md:pl-8"}`}>
         <div className={`inline-block p-5 rounded-2xl border transition-all duration-500 ${
