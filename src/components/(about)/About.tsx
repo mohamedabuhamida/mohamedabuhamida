@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Reveal from "@/components/animation/Reveal";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
