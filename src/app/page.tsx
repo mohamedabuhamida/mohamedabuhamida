@@ -148,7 +148,6 @@ export default function Home() {
             experience={experience}
             achievements={achievements}
             certificates={certificates}
-            scrollYProgress={fallbackProgress}
           />
         </main>
       )}
