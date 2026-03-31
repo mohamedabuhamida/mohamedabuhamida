@@ -97,7 +97,7 @@ export default function About({
             {/* Pass the scroll progress to the Experience component */}
             <Experience
               experience={experience}
-              scrollYProgress={experienceScrollProgress}
+              scrollYProgress={expScroll}
             />
           </div>
         </section>
@@ -120,7 +120,7 @@ export default function About({
       </StickySection>
 
       {/* 5. ACHIEVEMENTS & CERTIFICATES */}
-      <StickySection className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
+      <StickySection  className="bg-linear-to-tr from-bg to-primary shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
         <SectionHeader title="Certifications" accent="" />
         <div className="w-full max-w-5xl px-4">
           <Certifications certificates={certificates} />
