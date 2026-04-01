@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Github, Linkedin } from "lucide-react";
 import { FaUpwork } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
 export default function Header() {
+  const pathname = usePathname();
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -36,6 +38,12 @@ export default function Header() {
 
   // 3. Active section observer
   useEffect(() => {
+    const updateActiveSectionFromScroll = () => {
+      if (window.scrollY < window.innerHeight * 0.35) {
+        setActiveSection("home");
+      }
+    };
+
     const observerOptions = {
       // This margin creates a horizontal "strip" in the middle of the screen.
       // When a section's boundary crosses this strip, it becomes active.
@@ -59,8 +67,34 @@ export default function Header() {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    updateActiveSectionFromScroll();
+    window.addEventListener("scroll", updateActiveSectionFromScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", updateActiveSectionFromScroll);
+    };
   }, []);
+
+  const handleNavClick = (id: string) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== "/") return;
+
+    if (id === "home") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setActiveSection("home");
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    event.preventDefault();
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    setActiveSection(id);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -99,6 +133,7 @@ export default function Header() {
                   <Link
                     key={item.label}
                     href={item.href}
+                    onClick={handleNavClick(item.id)}
                     className="relative px-4 py-2 text-sm font-medium transition-colors"
                   >
                     {isActive && (
@@ -158,7 +193,7 @@ export default function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleNavClick(item.id)}
                 className={`text-xl font-semibold ${activeSection === item.id ? "text-accent" : "text-text"}`}
               >
                 {item.label}

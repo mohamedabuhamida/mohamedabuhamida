@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const sections = [
   { title: "Hero", href: "/dashboard/hero", desc: "Edit intro content and key stats." },
+  { title: "CV", href: "/dashboard/cv", desc: "Upload and replace the public resume PDF." },
   { title: "Skills", href: "/dashboard/skills", desc: "Manage skill names and levels." },
   { title: "Experience", href: "/dashboard/experience", desc: "Maintain work journey entries." },
   { title: "Education", href: "/dashboard/education", desc: "Keep education details up to date." },
