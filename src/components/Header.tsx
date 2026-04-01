@@ -34,63 +34,49 @@ export default function Header() {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
   }, [isMobileMenuOpen]);
 
-  // 3. Active section tracking
+  // 3. Active section observer
   useEffect(() => {
-    const sectionIds = navigationItems.map((item) => item.id);
+    const observerOptions = {
+      // This margin creates a horizontal "strip" in the middle of the screen.
+      // When a section's boundary crosses this strip, it becomes active.
+      rootMargin: "-30% 0px -60% 0px",
+      threshold: 0,
+    };
 
-    const updateActiveSection = () => {
-      const y = window.scrollY;
-
-      // Keep Home active at the top.
-      if (y < 120) {
-        setActiveSection("home");
-        return;
-      }
-
-      const marker = window.innerHeight * 0.35;
-      let current = "home";
-
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= marker && rect.bottom > marker) {
-          current = id;
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
         }
-      }
-
-      // If user reached bottom, force Contact.
-      if (window.innerHeight + y >= document.body.scrollHeight - 8) {
-        current = "contact";
-      }
-
-      setActiveSection(current);
+      });
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
-    window.addEventListener("hashchange", updateActiveSection);
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
-      window.removeEventListener("hashchange", updateActiveSection);
-    };
+    // Observe all sections defined in navigation
+    navigationItems.forEach((item) => {
+      const el = document.getElementById(item.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out${isSticky ? "max-w-3xl mx-auto top-4" : "max-w-7xl mx-auto top-0"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out
+        ${
+          isSticky
+            ? "max-w-3xl mx-auto top-4" // Floating pill style when sticky
+            : "max-w-7xl mx-auto top-0"
+        }`}
       >
-        <div
+        <div 
           className={`transition-all duration-500 px-6 sm:px-10 
-          ${
-            isSticky
-              ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2 "
-              : "bg-transparent py-6"
-          }`}
+          ${isSticky 
+            ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2" 
+            : "bg-transparent py-6"}`}
         >
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -113,27 +99,18 @@ export default function Header() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    onClick={() => setActiveSection(item.id)}
                     className="relative px-4 py-2 text-sm font-medium transition-colors"
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-indicator"
                         className="absolute inset-0 rounded-full bg-accent/20"
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 30,
-                        }}
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
-                    <span
-                      className={`relative z-10 transition-colors duration-300 ${
-                        isActive
-                          ? "text-accent"
-                          : "text-text/70 hover:text-text"
-                      }`}
-                    >
+                    <span className={`relative z-10 transition-colors duration-300 ${
+                      isActive ? "text-accent" : "text-text/70 hover:text-text"
+                    }`}>
                       {item.label}
                     </span>
                   </Link>
@@ -144,18 +121,9 @@ export default function Header() {
             {/* Actions */}
             <div className="flex items-center gap-4">
               <div className="hidden lg:flex items-center gap-3">
-                <SocialLink
-                  href="https://linkedin.com/in/mohamedabuhamida"
-                  icon={<Linkedin size={18} />}
-                />
-                <SocialLink
-                  href="https://github.com/mohamedabuhamida"
-                  icon={<Github size={18} />}
-                />
-                <SocialLink
-                  href="https://www.upwork.com/freelancers/~0191d02b8deff4294c"
-                  icon={<FaUpwork size={18} />}
-                />
+                <SocialLink href="https://linkedin.com/in/mohamedabuhamida" icon={<Linkedin size={18} />} />
+                <SocialLink href="https://github.com/mohamedabuhamida" icon={<Github size={18} />} />
+                <SocialLink href="https://www.upwork.com/freelancers/~0191d02b8deff4294c" icon={<FaUpwork size={18} />} />
               </div>
 
               {/* Mobile Menu Toggle */}
@@ -163,18 +131,8 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="md:hidden p-2 text-text hover:text-accent transition"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
@@ -183,34 +141,24 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 z-100 md:hidden transition-all duration-500 
+      <div className={`fixed inset-0 z-100 md:hidden transition-all duration-500 
         ${isMobileMenuOpen ? "visible" : "invisible"}`}
       >
-        <div
+        <div 
           className={`absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-500
           ${isMobileMenuOpen ? "opacity-100" : "opacity-0"}`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
-        <div
-          className={`absolute right-0 top-0 h-full w-70 bg-primary border-l border-white/10 p-8 transition-transform duration-500 ease-out
+        <div className={`absolute right-0 top-0 h-full w-70 bg-primary border-l border-white/10 p-8 transition-transform duration-500 ease-out
           ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
-          <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="absolute top-6 right-6 text-2xl"
-          >
-            ✕
-          </button>
+          <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 text-2xl">?</button>
           <div className="flex flex-col gap-8 mt-12">
             {navigationItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => {
-                  setActiveSection(item.id);
-                  setIsMobileMenuOpen(false);
-                }}
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`text-xl font-semibold ${activeSection === item.id ? "text-accent" : "text-text"}`}
               >
                 {item.label}
@@ -225,11 +173,7 @@ export default function Header() {
 
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   return (
-    <Link
-      href={href}
-      target="_blank"
-      className="text-text/60 hover:text-accent transition-colors"
-    >
+    <Link href={href} target="_blank" className="text-text/60 hover:text-accent transition-colors">
       {icon}
     </Link>
   );
