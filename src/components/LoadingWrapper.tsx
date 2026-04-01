@@ -1,8 +1,7 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 interface Props {
@@ -15,17 +14,13 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
   const glowRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
 
-  const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState<
     { id: number; left: string; top: string; duration: string }[]
   >([]);
   const [binaryLeft, setBinaryLeft] = useState<string[]>([]);
   const [binaryRight, setBinaryRight] = useState<string[]>([]);
 
-  // ✅ Prevent hydration mismatch
   useEffect(() => {
-    setMounted(true);
-
     const newParticles = Array.from({ length: 6 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
@@ -46,9 +41,8 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
     setBinaryRight(newBinaryRight);
   }, []);
 
-  // ✅ GSAP Animations
   useEffect(() => {
-    if (!mounted) return;
+    if (!logoRef.current || !glowRef.current || !cursorRef.current) return;
 
     const tl = gsap.timeline({ repeat: -1, yoyo: true });
 
@@ -110,23 +104,15 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
     return () => {
       tl.kill();
     };
-  }, [mounted]);
-
-  if (!mounted) return null;
+  }, []);
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-linear-to-tr from-bg via-primary to-bg font-sans">
         <div className="relative flex flex-col items-center gap-8">
-          {/* Glow */}
-          <div
-            ref={glowRef}
-            className="absolute w-60 h-60 bg-accent/30 rounded-full blur-3xl"
-          ></div>
+          <div ref={glowRef} className="absolute w-60 h-60 bg-accent/30 rounded-full blur-3xl" />
+          <div className="absolute w-80 h-80 bg-primary/50 rounded-full blur-3xl animate-pulse" />
 
-          <div className="absolute w-80 h-80 bg-primary/50 rounded-full blur-3xl animate-pulse"></div>
-
-          {/* Logo */}
           <div className="relative perspective-1000">
             <div ref={logoRef} className="relative transform-style-3d">
               <div className="relative">
@@ -138,12 +124,11 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
                   priority
                   className="object-contain relative z-10 drop-shadow-2xl"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-accent/20 to-transparent rounded-full blur-sm"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-accent/20 to-transparent rounded-full blur-sm" />
               </div>
             </div>
           </div>
 
-          {/* Text */}
           <div className="relative">
             <p className="text-text-muted text-lg tracking-wider flex items-center">
               <span>
@@ -155,26 +140,20 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
             </p>
 
             <div className="mt-4 w-48 h-1 bg-primary/50 rounded-full overflow-hidden">
-              <div className="h-full bg-linear-to-r from-accent via-accent/80 to-accent rounded-full animate-progress"></div>
+              <div className="h-full bg-linear-to-r from-accent via-accent/80 to-accent rounded-full animate-progress" />
             </div>
           </div>
 
-          {/* Floating Particles */}
           <div className="absolute inset-0 pointer-events-none">
             {particles.map((p) => (
               <div
                 key={p.id}
                 className="absolute w-1 h-1 bg-accent/30 rounded-full animate-float"
-                style={{
-                  left: p.left,
-                  top: p.top,
-                  animationDuration: p.duration,
-                }}
+                style={{ left: p.left, top: p.top, animationDuration: p.duration }}
               />
             ))}
           </div>
 
-          {/* Binary Left */}
           <div className="absolute bottom-8 left-8 text-accent/10 text-xs font-mono">
             {binaryLeft.map((code, i) => (
               <div key={i} className="animate-binary">
@@ -183,21 +162,15 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
             ))}
           </div>
 
-          {/* Binary Right */}
           <div className="absolute top-8 right-8 text-accent/10 text-xs font-mono">
             {binaryRight.map((code, i) => (
-              <div
-                key={i}
-                className="animate-binary"
-                style={{ animationDelay: `${i * 0.5}s` }}
-              >
+              <div key={i} className="animate-binary" style={{ animationDelay: `${i * 0.5}s` }}>
                 {code}
               </div>
             ))}
           </div>
         </div>
 
-        {/* CSS Animations */}
         <style jsx>{`
           @keyframes float {
             0%,

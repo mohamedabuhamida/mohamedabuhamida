@@ -34,39 +34,55 @@ export default function Header() {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
   }, [isMobileMenuOpen]);
 
-  // 3. Active section observer
+  // 3. Active section tracking
   useEffect(() => {
-    const observerOptions = {
-      // This margin creates a horizontal "strip" in the middle of the screen.
-      // When a section's boundary crosses this strip, it becomes active.
-      rootMargin: "-30% 0px -60% 0px",
-      threshold: 0,
-    };
+    const sectionIds = navigationItems.map((item) => item.id);
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    const updateActiveSection = () => {
+      const y = window.scrollY;
+
+      // Keep Home active at the top.
+      if (y < 120) {
+        setActiveSection("home");
+        return;
+      }
+
+      const marker = window.innerHeight * 0.35;
+      let current = "home";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= marker && rect.bottom > marker) {
+          current = id;
         }
-      });
+      }
+
+      // If user reached bottom, force Contact.
+      if (window.innerHeight + y >= document.body.scrollHeight - 8) {
+        current = "contact";
+      }
+
+      setActiveSection(current);
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    window.addEventListener("hashchange", updateActiveSection);
 
-    // Observe all sections defined in navigation
-    navigationItems.forEach((item) => {
-      const el = document.getElementById(item.id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+      window.removeEventListener("hashchange", updateActiveSection);
+    };
   }, []);
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out
-        ${
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out${
           isSticky
             ? "max-w-3xl mx-auto top-4" // Floating pill style when sticky
             : "max-w-7xl mx-auto top-0"
@@ -99,6 +115,7 @@ export default function Header() {
                   <Link
                     key={item.label}
                     href={item.href}
+                    onClick={() => setActiveSection(item.id)}
                     className="relative px-4 py-2 text-sm font-medium transition-colors"
                   >
                     {isActive && (
@@ -158,7 +175,10 @@ export default function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setActiveSection(item.id);
+                  setIsMobileMenuOpen(false);
+                }}
                 className={`text-xl font-semibold ${activeSection === item.id ? "text-accent" : "text-text"}`}
               >
                 {item.label}

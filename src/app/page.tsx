@@ -156,7 +156,6 @@ function HeroAboutTransition({
         style={{ scale: heroScale, rotate: heroRotate }}
         className="sticky top-0 h-screen overflow-hidden z-0"
       >
-        <div id="home" className="absolute top-0 left-0 h-px w-px" />
         <Hero data={data} scrollYProgress={scrollYProgress} />
       </motion.section>
 
