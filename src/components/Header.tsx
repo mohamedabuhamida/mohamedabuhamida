@@ -141,7 +141,7 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-[100] md:hidden transition-all duration-500 
+      <div className={`fixed inset-0 z-100 md:hidden transition-all duration-500 
         ${isMobileMenuOpen ? "visible" : "invisible"}`}
       >
         <div 
@@ -149,7 +149,7 @@ export default function Header() {
           ${isMobileMenuOpen ? "opacity-100" : "opacity-0"}`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
-        <div className={`absolute right-0 top-0 h-full w-[280px] bg-primary border-l border-white/10 p-8 transition-transform duration-500 ease-out
+        <div className={`absolute right-0 top-0 h-full w-70 bg-primary border-l border-white/10 p-8 transition-transform duration-500 ease-out
           ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 text-2xl">✕</button>
