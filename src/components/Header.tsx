@@ -82,13 +82,17 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out${isSticky ? "max-w-3xl mx-auto top-4" : "max-w-7xl mx-auto top-0"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out${
+          isSticky
+            ? "max-w-3xl mx-auto top-4" 
+            : "max-w-7xl mx-auto top-0"
+        }`}
       >
         <div
           className={`transition-all duration-500 px-6 sm:px-10 
           ${
             isSticky
-              ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2 "
+              ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2"
               : "bg-transparent py-6"
           }`}
         >
