@@ -88,7 +88,7 @@ export default function Header() {
           className={`transition-all duration-500 px-6 sm:px-10 
           ${
             isSticky
-              ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2 max-w-6xl"
+              ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2 "
               : "bg-transparent py-6"
           }`}
         >
