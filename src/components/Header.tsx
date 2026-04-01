@@ -82,19 +82,16 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out${
-          isSticky
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out${isSticky
             ? "max-w-3xl mx-auto top-4" // Floating pill style when sticky
             : "max-w-7xl mx-auto top-0"
         }`}
       >
-        <div
+        <div 
           className={`transition-all duration-500 px-6 sm:px-10 
-          ${
-            isSticky
-              ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2"
-              : "bg-transparent py-6"
-          }`}
+          ${isSticky 
+            ? "bg-primary/20 backdrop-blur-md shadow-2xl rounded-full border border-white/10 py-2" 
+            : "bg-transparent py-6"}`}
         >
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -124,20 +121,12 @@ export default function Header() {
                       <motion.span
                         layoutId="nav-indicator"
                         className="absolute inset-0 rounded-full bg-accent/20"
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 30,
-                        }}
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
-                    <span
-                      className={`relative z-10 transition-colors duration-300 ${
-                        isActive
-                          ? "text-accent"
-                          : "text-text/70 hover:text-text"
-                      }`}
-                    >
+                    <span className={`relative z-10 transition-colors duration-300 ${
+                      isActive ? "text-accent" : "text-text/70 hover:text-text"
+                    }`}>
                       {item.label}
                     </span>
                   </Link>
@@ -148,18 +137,9 @@ export default function Header() {
             {/* Actions */}
             <div className="flex items-center gap-4">
               <div className="hidden lg:flex items-center gap-3">
-                <SocialLink
-                  href="https://linkedin.com/in/mohamedabuhamida"
-                  icon={<Linkedin size={18} />}
-                />
-                <SocialLink
-                  href="https://github.com/mohamedabuhamida"
-                  icon={<Github size={18} />}
-                />
-                <SocialLink
-                  href="https://www.upwork.com/freelancers/~0191d02b8deff4294c"
-                  icon={<FaUpwork size={18} />}
-                />
+                <SocialLink href="https://linkedin.com/in/mohamedabuhamida" icon={<Linkedin size={18} />} />
+                <SocialLink href="https://github.com/mohamedabuhamida" icon={<Github size={18} />} />
+                <SocialLink href="https://www.upwork.com/freelancers/~0191d02b8deff4294c" icon={<FaUpwork size={18} />} />
               </div>
 
               {/* Mobile Menu Toggle */}
@@ -167,18 +147,8 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="md:hidden p-2 text-text hover:text-accent transition"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
@@ -187,25 +157,18 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 z-100 md:hidden transition-all duration-500 
+      <div className={`fixed inset-0 z-100 md:hidden transition-all duration-500 
         ${isMobileMenuOpen ? "visible" : "invisible"}`}
       >
-        <div
+        <div 
           className={`absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-500
           ${isMobileMenuOpen ? "opacity-100" : "opacity-0"}`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
-        <div
-          className={`absolute right-0 top-0 h-full w-70 bg-primary border-l border-white/10 p-8 transition-transform duration-500 ease-out
+        <div className={`absolute right-0 top-0 h-full w-70 bg-primary border-l border-white/10 p-8 transition-transform duration-500 ease-out
           ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
         >
-          <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="absolute top-6 right-6 text-2xl"
-          >
-            ✕
-          </button>
+          <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 text-2xl">✕</button>
           <div className="flex flex-col gap-8 mt-12">
             {navigationItems.map((item) => (
               <Link
@@ -229,11 +192,7 @@ export default function Header() {
 
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   return (
-    <Link
-      href={href}
-      target="_blank"
-      className="text-text/60 hover:text-accent transition-colors"
-    >
+    <Link href={href} target="_blank" className="text-text/60 hover:text-accent transition-colors">
       {icon}
     </Link>
   );
