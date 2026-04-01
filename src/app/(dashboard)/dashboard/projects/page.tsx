@@ -13,6 +13,7 @@ const fields: FieldConfig[] = [
   { key: "background_type", label: "Background Type", placeholder: "image or video", required: false },
   { key: "accent_color", label: "Accent Color", placeholder: "#4EA8DE", required: false },
   { key: "is_featured", label: "Featured", type: "checkbox", required: false },
+  { key: "display_order", label: "Display Order", type: "number", placeholder: "100", required: false },
   { key: "love", label: "Love Count", type: "number", placeholder: "0", required: false },
   { key: "link", label: "Project Link", type: "url", placeholder: "https://...", required: true },
   { key: "image", label: "Card Image", type: "image", required: false },
