@@ -45,21 +45,31 @@ export default function CrudSectionPage<T extends Record<string, any>>({
     const payload = serializeSave ? serializeSave(item) : item;
     const method = item.id ? "PUT" : "POST";
 
-    await fetch(endpoint, {
+    const res = await fetch(endpoint, {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
 
+    if (!res.ok) {
+      const errorPayload = await res.json().catch(() => null);
+      throw new Error(errorPayload?.error || `Request failed with status ${res.status}`);
+    }
+
     await fetchData();
   };
 
   const handleDelete = async (id: string | number) => {
-    await fetch(endpoint, {
+    const res = await fetch(endpoint, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
     });
+
+    if (!res.ok) {
+      const errorPayload = await res.json().catch(() => null);
+      throw new Error(errorPayload?.error || `Request failed with status ${res.status}`);
+    }
 
     if (singleRecord) {
       setData([]);

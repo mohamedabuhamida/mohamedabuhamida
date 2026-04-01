@@ -113,8 +113,8 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
           <div ref={glowRef} className="absolute w-60 h-60 bg-accent/30 rounded-full blur-3xl" />
           <div className="absolute w-80 h-80 bg-primary/50 rounded-full blur-3xl animate-pulse" />
 
-          <div className="relative perspective-1000">
-            <div ref={logoRef} className="relative transform-style-3d">
+          <div className="relative" style={{ perspective: "1000px" }}>
+            <div ref={logoRef} className="relative" style={{ transformStyle: "preserve-3d" }}>
               <div className="relative">
                 <Image
                   src="/logo.png"
@@ -170,62 +170,6 @@ export default function LoadingWrapper({ isLoading, children }: Props) {
             ))}
           </div>
         </div>
-
-        <style jsx>{`
-          @keyframes float {
-            0%,
-            100% {
-              transform: translateY(0) translateX(0);
-            }
-            50% {
-              transform: translateY(-20px) translateX(10px);
-            }
-          }
-
-          @keyframes progress {
-            0% {
-              width: 0%;
-            }
-            50% {
-              width: 70%;
-            }
-            100% {
-              width: 100%;
-            }
-          }
-
-          @keyframes binary {
-            0%,
-            100% {
-              opacity: 0.3;
-              transform: translateY(0);
-            }
-            50% {
-              opacity: 1;
-              transform: translateY(-5px);
-            }
-          }
-
-          .animate-float {
-            animation: float 4s ease-in-out infinite;
-          }
-
-          .animate-progress {
-            animation: progress 2s ease-in-out infinite;
-          }
-
-          .animate-binary {
-            animation: binary 3s ease-in-out infinite;
-          }
-
-          .perspective-1000 {
-            perspective: 1000px;
-          }
-
-          .transform-style-3d {
-            transform-style: preserve-3d;
-          }
-        `}</style>
       </div>
     );
   }

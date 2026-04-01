@@ -61,9 +61,15 @@ export default function SectionEditor<T extends Record<string, any>>({
     if (!editingItem) return;
 
     setIsSubmitting(true);
-    await onSave(editingItem);
-    setIsSubmitting(false);
-    handleCloseModal();
+    try {
+      await onSave(editingItem);
+      handleCloseModal();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Save failed";
+      alert(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleImageUpload = async (fieldKey: string, file?: File) => {
@@ -145,7 +151,14 @@ export default function SectionEditor<T extends Record<string, any>>({
                       <HiOutlinePencil size={18} />
                     </button>
                     <button
-                      onClick={() => onDelete(item.id as string | number)}
+                      onClick={async () => {
+                        try {
+                          await onDelete(item.id as string | number);
+                        } catch (error) {
+                          const message = error instanceof Error ? error.message : "Delete failed";
+                          alert(message);
+                        }
+                      }}
                       className="p-2 rounded-lg hover:bg-red-500/20 text-red-400 transition-colors"
                       title="Delete"
                     >

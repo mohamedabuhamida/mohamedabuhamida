@@ -26,10 +26,23 @@ export async function GET() {
   const orderedQuery = await supabase
     .from("projects")
     .select("*")
-    .order("order_index", { ascending: false });
+    .order("is_featured", { ascending: false })
+    .order("display_order", { ascending: false })
+    .order("created_at", { ascending: false });
 
   if (!orderedQuery.error) {
     return NextResponse.json(orderedQuery.data);
+  }
+
+  const orderIndexQuery = await supabase
+    .from("projects")
+    .select("*")
+    .order("is_featured", { ascending: false })
+    .order("order_index", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  if (!orderIndexQuery.error) {
+    return NextResponse.json(orderIndexQuery.data);
   }
 
   const fallbackQuery = await supabase
@@ -73,6 +86,7 @@ export async function POST(request: NextRequest) {
     link: body.link,
     accent_color: body.accent_color,
     is_featured: body.is_featured,
+    display_order: body.display_order ?? body.order_index ?? 0,
     love: body.love ?? 0,
   };
 
@@ -110,6 +124,7 @@ export async function PUT(request: NextRequest) {
     link: body.link,
     accent_color: body.accent_color,
     is_featured: body.is_featured,
+    display_order: body.display_order ?? body.order_index ?? 0,
     love: body.love ?? 0,
   };
 

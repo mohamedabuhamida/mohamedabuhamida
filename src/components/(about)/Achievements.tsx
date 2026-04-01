@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { HiOutlineTrophy } from "react-icons/hi2";
 import { AchievementProps } from "@/types";
 
 export default function Achievements({
@@ -21,7 +22,9 @@ export default function Achievements({
             className="w-full p-6 rounded-3xl border border-white/10 bg-bg flex flex-col justify-between"
           >
             <div className="space-y-4">
-              <div className="text-3xl">??</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent">
+                <HiOutlineTrophy size={26} />
+              </div>
 
               <div>
                 <h4 className="text-xl font-bold leading-tight">{item.title}</h4>
@@ -72,7 +75,9 @@ export default function Achievements({
                 className="w-full max-w-sm h-120 p-8 rounded-3xl border border-white/10 bg-bg flex flex-col justify-between"
               >
                 <div className="space-y-4">
-                  <div className="text-4xl">??</div>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent">
+                    <HiOutlineTrophy size={30} />
+                  </div>
 
                   <div>
                     <h4 className="text-2xl font-bold leading-tight">{item.title}</h4>

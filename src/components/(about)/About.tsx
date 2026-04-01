@@ -31,10 +31,15 @@ export default function About({
   achievements: AchievementProps[];
   certificates: CertificateProps[];
 }) {
-  // 1. UNIQUE REF for Experience
   const expRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: expScroll } = useScroll({
     target: expRef,
+    offset: ["start start", "end end"],
+  });
+
+  const certificatesRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: certificatesScroll } = useScroll({
+    target: certificatesRef,
     offset: ["start start", "end end"],
   });
 
@@ -115,12 +120,17 @@ export default function About({
       </StickySection>
 
       {/* 5. CERTIFICATIONS SECTION */}
-      <StickySection className="bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)]">
-        <SectionHeader title="Certifications" accent="" />
-        <div className="w-full max-w-6xl px-2 md:px-4 lg:overflow-y-auto lg:max-h-[80vh] no-scrollbar">
-          <Certifications certificates={certificates} />
+      <div ref={certificatesRef} className="relative md:h-[300vh]">
+        <div className="w-full flex flex-col items-center justify-center bg-bg shadow-[0_-50px_50px_rgba(0,0,0,0.8)] overflow-visible px-4 py-16 md:sticky md:top-0 md:h-screen md:overflow-hidden md:px-0 md:py-0">
+          <SectionHeader title="Certifications" accent="" />
+          <div className="w-full max-w-6xl px-2 md:px-4">
+            <Certifications
+              certificates={certificates}
+              scrollYProgress={certificatesScroll}
+            />
+          </div>
         </div>
-      </StickySection>
+      </div>
 
       {/* 6. ACHIEVEMENTS SECTION (Sticky Scroll Container) */}
       <section

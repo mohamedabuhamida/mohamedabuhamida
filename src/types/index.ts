@@ -101,5 +101,6 @@ export interface ProjectProps {
   loved_by_user?: boolean;
 
   created_at?: string;
+  display_order?: number;
   order_index?: number;
 }

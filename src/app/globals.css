@@ -33,3 +33,48 @@
   opacity: 1;
 }
 
+@keyframes loading-float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+  }
+}
+
+@keyframes loading-progress {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes loading-binary {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float {
+  animation: loading-float 4s ease-in-out infinite;
+}
+
+.animate-progress {
+  animation: loading-progress 2s ease-in-out infinite;
+}
+
+.animate-binary {
+  animation: loading-binary 3s ease-in-out infinite;
+}
