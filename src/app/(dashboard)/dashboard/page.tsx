@@ -8,9 +8,10 @@ const sections = [
   { title: "Education", href: "/dashboard/education", desc: "Keep education details up to date." },
   { title: "Certificates", href: "/dashboard/certificates", desc: "Add certificates and credentials." },
   { title: "Achievements", href: "/dashboard/achievements", desc: "Track milestones and recognitions." },
-  { title: "AI Knowledge", href: "/dashboard/profile-knowledge", desc: "Edit the vector knowledge base for the Gemini assistant." },
   { title: "Projects", href: "/dashboard/projects", desc: "Showcase portfolio projects." },
   { title: "Blogs", href: "/dashboard/blogs", desc: "Write, edit, publish, and manage blog posts." },
+  { title: "Media", href: "/dashboard/media", desc: "Browse, replace, rename, copy, and delete bucket images." },
+  { title: "AI Knowledge", href: "/dashboard/profile-knowledge", desc: "Edit the vector knowledge base for the Gemini assistant." },
 ];
 
 export default function DashboardOverviewPage() {
