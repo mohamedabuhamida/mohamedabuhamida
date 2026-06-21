@@ -8,6 +8,7 @@ const sections = [
   { title: "Education", href: "/dashboard/education", desc: "Keep education details up to date." },
   { title: "Certificates", href: "/dashboard/certificates", desc: "Add certificates and credentials." },
   { title: "Achievements", href: "/dashboard/achievements", desc: "Track milestones and recognitions." },
+  { title: "AI Knowledge", href: "/dashboard/profile-knowledge", desc: "Edit the vector knowledge base for the Gemini assistant." },
   { title: "Projects", href: "/dashboard/projects", desc: "Showcase portfolio projects." },
 ];
 

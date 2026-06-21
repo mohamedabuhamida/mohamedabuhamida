@@ -17,6 +17,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { name: "Education", href: "/dashboard/education" },
     { name: "Certificates", href: "/dashboard/certificates" },
     { name: "Achievements", href: "/dashboard/achievements" },
+    { name: "AI Knowledge", href: "/dashboard/profile-knowledge" },
     { name: "Projects", href: "/dashboard/projects" },
   ];
 
