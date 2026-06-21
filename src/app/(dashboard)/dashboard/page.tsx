@@ -10,6 +10,7 @@ const sections = [
   { title: "Achievements", href: "/dashboard/achievements", desc: "Track milestones and recognitions." },
   { title: "AI Knowledge", href: "/dashboard/profile-knowledge", desc: "Edit the vector knowledge base for the Gemini assistant." },
   { title: "Projects", href: "/dashboard/projects", desc: "Showcase portfolio projects." },
+  { title: "Blogs", href: "/dashboard/blogs", desc: "Write, edit, publish, and manage blog posts." },
 ];
 
 export default function DashboardOverviewPage() {

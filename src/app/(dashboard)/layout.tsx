@@ -19,6 +19,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { name: "Achievements", href: "/dashboard/achievements" },
     { name: "AI Knowledge", href: "/dashboard/profile-knowledge" },
     { name: "Projects", href: "/dashboard/projects" },
+    { name: "Blogs", href: "/dashboard/blogs" },
   ];
 
   const handleSignOut = async () => {

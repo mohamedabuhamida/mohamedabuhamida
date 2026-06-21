@@ -19,6 +19,7 @@ export default function Header() {
     { label: "Home", href: "/#home", id: "home" },
     { label: "About", href: "/#about", id: "about" },
     { label: "Projects", href: "/#projects", id: "projects" },
+    { label: "Blog", href: "/blog", id: "blog" },
     { label: "Contact", href: "/#contact", id: "contact" },
   ];
 
@@ -63,6 +64,7 @@ export default function Header() {
 
     // Observe all sections defined in navigation
     navigationItems.forEach((item) => {
+      if (item.href.startsWith("/blog")) return;
       const el = document.getElementById(item.id);
       if (el) observer.observe(el);
     });
@@ -78,6 +80,7 @@ export default function Header() {
 
   const handleNavClick = (id: string) => (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname !== "/") return;
+    if (id === "blog") return;
 
     if (id === "home") {
       event.preventDefault();
@@ -128,7 +131,7 @@ export default function Header() {
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-1">
               {navigationItems.map((item) => {
-                const isActive = activeSection === item.id;
+                const isActive = item.href === "/blog" ? pathname.startsWith("/blog") : activeSection === item.id;
                 return (
                   <Link
                     key={item.label}
@@ -194,7 +197,7 @@ export default function Header() {
                 key={item.label}
                 href={item.href}
                 onClick={handleNavClick(item.id)}
-                className={`text-xl font-semibold ${activeSection === item.id ? "text-accent" : "text-text"}`}
+                className={`text-xl font-semibold ${item.href === "/blog" ? (pathname.startsWith("/blog") ? "text-accent" : "text-text") : activeSection === item.id ? "text-accent" : "text-text"}`}
               >
                 {item.label}
               </Link>

@@ -104,3 +104,45 @@ export interface ProjectProps {
   display_order?: number;
   order_index?: number;
 }
+
+export interface BlogPost {
+  id: number | string;
+  title: string;
+  slug: string;
+  description: string;
+  tags: string[];
+  cover_image?: string | null;
+  content: string;
+  published: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface BlogListItem extends BlogPost {
+  readingTimeMinutes: number;
+}
+
+export interface TocItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
+export interface StorageImage {
+  name: string;
+  path: string;
+  folder: string;
+  url: string;
+  size: number;
+  mimeType: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface StorageBucket {
+  id: string;
+  name: string;
+  public: boolean;
+  fileSizeLimit?: number | null;
+  allowedMimeTypes?: string[] | null;
+}
