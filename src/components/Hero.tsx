@@ -59,7 +59,7 @@ export default function Hero({
 
               <Reveal delay={0.3}>
                 <div className="flex gap-5 pt-4">
-                  <Link
+                  <a
                     href="/api/cv"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -68,7 +68,7 @@ export default function Hero({
                     <span className="absolute inset-0.5 rounded-full bg-linear-to-b from-white/20 to-transparent opacity-60 pointer-events-none"></span>
                     <span className="absolute -left-full top-0 h-full w-[60%] skew-x-[-25deg] bg-linear-to-r from-transparent via-white/30 to-transparent animate-[shine_6s_ease-in-out_infinite]"></span>
                     <span className="relative z-10">View Resume</span>
-                  </Link>
+                  </a>
 
                   <Link
                     href="/#contact"
